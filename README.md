@@ -13,7 +13,8 @@ Following is a list of functional requirements:
 5. (15%) Inside a given room, the user should be able to send messages to the room, see previous messages, and see new messages appear in real time (without having to refresh the page manually).
 6. (10%) It should be possible to send a private message to another user.
 7. (15%) The creator of a room should be able to kick a user from a room. A user which has been kicked from a room can re-enter. The creator can also ban a user, which means (s)he won't be able to join the room again.
-In addition, the following technical requirements are given:
+
+*In addition, the following technical requirements are given:*
 
 8. (15%) Each component (controller, factory, etc.) should be in a single file, but the files should be concatenated and minified when prepared for production, by using a grunt (or gulp) task.
 9. (10%) All external dependencies (AngularJS etc.) should be installed using bower (EDIT: or npm)
@@ -126,7 +127,7 @@ This should get called to get a list of all connected users.
 There are no parameters for this function.
 The server will emit the "userlist" event back to the caller, containing a list of userids currently "logged in"
 
-Note that the following commands are also supported, but it is not required to use them (unless you want to write a really awesome chat application). Feel free to experiment with these features.
+*Note that the following commands are also supported, but it is not required to use them (unless you want to write a really awesome chat application). Feel free to experiment with these features.*
 
 ######op
 Allows the creator of a room to convert another user to a "op", i.e. grant that user the same priviledges as the creator of the room.
