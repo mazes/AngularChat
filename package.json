@@ -1,0 +1,24 @@
+{
+  "name": "angularchat",
+  "version": "1.0.0",
+  "description": "assignment2",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mazes/AngularChat.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "ERA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mazes/AngularChat/issues"
+  },
+  "homepage": "https://github.com/mazes/AngularChat#readme"
+}
