@@ -1,0 +1,2 @@
+# AngularChat
+verkefni 2
