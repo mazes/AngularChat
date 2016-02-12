@@ -2,10 +2,9 @@
 var uglify = require("gulp-uglifyjs");
 var jshint = require('gulp-jshint');
 var gulp = require('gulp');
+var connect = require('gulp-connect');
 
-gulp.task('default', function() {
-    //code for tasks
-});
+gulp.task('default', ['webserver']);
 
 gulp.task('lint', function() {
   return gulp.src('src/*.js')
@@ -18,3 +17,10 @@ gulp.task('uglify', function() {
     .pipe(uglify())
     .pipe(gulp.dest('build'));
 });
+
+gulp.task('webserver', function() {
+  connect.server({
+    port: 8888
+  });
+});
+
