@@ -1,0 +1,1 @@
+"use strict";var app=angular.module("angularChat",["ui.bootstrap","ngRoute"]);app.config(["$routeProvider",function(o){o.$.when("login",{templateUrl:"login/login.html",controller:"LoginController"})}]);
