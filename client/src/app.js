@@ -8,5 +8,8 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
         }).when("/roomlist", {
         	templateUrl: "roomlist/roomlist.html",
         	controller: "RoomListController"
+        }).when("/createroom", {
+            templateUrl: "createroom/createroom.html",
+            controller: "CreateRoomController"
         });
 }]);

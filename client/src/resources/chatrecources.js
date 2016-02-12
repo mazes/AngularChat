@@ -14,6 +14,10 @@ function ChatResource(){
 		getUsers: function getUsers(callback){
 
 		},
-		
+
+		newRoom: function newRoom() {
+
+		},
+
 	}
 })
