@@ -37,4 +37,4 @@ function ChatResource(){
 		joinRoom: function joinRoom()
 
 	}
-})
+});

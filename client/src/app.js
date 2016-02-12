@@ -1,12 +1,9 @@
-'use strict'
+"use strict";
 
-var app = angular.module("angularChat", ["ui.bootstrap", "ngRoute"]);
-
-app.config(["$routeProvider", function($routeProvider) {
-    $routeProvider.
-        $.when("login", {
+angular.module("angularChat", ["ui.bootstrap", "ngRoute"]);
+angular.module("angularChat").config(["$routeProvider", function($routeProvider) {
+    $routeProvider.when("/", {
             templateUrl: "login/login.html",
             controller: "LoginController"
         });
-
 }]);
