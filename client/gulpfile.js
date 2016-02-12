@@ -1,5 +1,5 @@
 
-var uglify = require("gulp-uglify");
+var uglify = require("gulp-uglifyjs");
 var jshint = require('gulp-jshint');
 var gulp = require('gulp');
 
@@ -13,8 +13,8 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('compress', function() {
-  return gulp.src('src/*.js')
+gulp.task('uglify', function() {
+  return gulp.src(['src/*.js', 'src/login/LoginController.js'])
     .pipe(uglify())
     .pipe(gulp.dest('build'));
 });
