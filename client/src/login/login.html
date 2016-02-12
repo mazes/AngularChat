@@ -1,9 +1,6 @@
 <div>	
-	<form name="loginForm">
 		<input type="text" ng-model="user" required/>
-		
-		The username : {{user}} is {{available?'available':'not available'}}	
-		
-		<button ng-click="onLogin()" ng-show="loginForm.$valid">Login</button>
-	</form>
+			The username : {{user}}
+		<button ng-click="onLogin()">Login</button>
+	<div>{{errorMessage}}</div>
 </div>

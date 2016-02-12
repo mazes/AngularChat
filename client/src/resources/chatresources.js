@@ -4,6 +4,8 @@ angular.module("angularChat").factory("ChatResource",
 function ChatResource(){
 	return {
 		login: function login(user, pass, callback){
+			socket.emit("adduser", user, callback);
+		},
 			/*Should get called when a user wants to join a room.
 			Note that the API supports a password-protected room,
 			however this is optional, i.e. your implementation doesn't
@@ -21,7 +23,6 @@ function ChatResource(){
 			  ( to all participants in the room, informing about the newly added user).
 			  If a new room is being created, the message "updatechat" is also emitted.
 			*/
-		},
 
 		getRoomList: function getRoomList(callback){
 			/*Should get called to receive a list of available rooms. There are no parameters. The server responds by emitting the "roomlist" event
@@ -29,6 +30,7 @@ function ChatResource(){
 		},
 
 		getUsers: function getUsers(){
+			socket.emit("users");
 			/*This should get called to get a list of all connected users.
 			There are no parameters for this function. The server will emit the "userlist"
 			 event back to the caller, containing a list of userids currently "logged in"*/

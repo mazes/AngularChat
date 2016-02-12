@@ -1,2 +1,9 @@
 <h1>Roomlist</h1>
 <span>{{rooms}}</span>
+
+<div ng-init="userList()">
+	<h2>Users</h2>
+	<ul>
+		<li ng-repeat="user in users"> {{user}}</li>
+	</ul>
+<div>
