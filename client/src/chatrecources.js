@@ -21,6 +21,7 @@ function ChatResource(){
 			  ( to all participants in the room, informing about the newly added user). 
 			  If a new room is being created, the message "updatechat" is also emitted.
 			*/
+			console.log("login in chatresource");
 		},
 
 		getRoomList: function getRoomList(callback){
