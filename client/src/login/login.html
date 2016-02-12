@@ -1,9 +1,15 @@
-<div ng-controller="LoginController">	
+<div ng-controller="LoginController">
+    <h1>Select a nickname</h1>
+
 	<form name="loginForm">
-		<input type="text" ng-model="user" required/>
-		
-		The username : {{user}} is {{available?'available':'not available'}}	
-		
-		<button ng-click="onLogin()" ng-show="loginForm.$valid">Login</button>
-	</form>
+        <fieldset class="form-group">
+            <label for="loginName"></label>
+            <input type="text" class="form-control" style="width:70%; display:inline;" ng-model="user" id="loginName" placeholder="Type here..." required/>
+		    <button class="btn btn-default" ng-click="onLogin()" ng-show="loginForm.$valid">Login</button> <br>
+
+            <div class="container-fluid alert-warning" style="margin: 10px;">
+                 The username : {{user}} is {{available?'available':'not available'}}
+            </div>
+        </fieldset>
+    </form>
 </div>

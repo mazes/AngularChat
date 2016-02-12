@@ -1,2 +1,12 @@
-<h1>Create Room</h1>
-<span>{{room}}</span>
+<div ng-controller="CreateRoomController">
+    <h1>Create a chatroom</h1>
+
+    <form>
+        <fieldset class="form-group">
+            <label for="roomTopic">Chatroom Topic</label>
+            <input type="text" class="form-control" ng-model="topic" id="roomTopic" placeholder="Leave blank for no topic">
+        </fieldset>
+    </form>
+
+    <span>{{topic}}</span>
+</div>
