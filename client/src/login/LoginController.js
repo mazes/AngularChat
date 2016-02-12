@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("LoginController",
-["$scope", "$location","ChatResource",
-function LoginController($scope, $location, ChatResource){
+["$scope", "$http", "$location","ChatResource",
+function LoginController($scope, $http, $location, ChatResource){
 	$scope.user = "";
 	$scope.pass = "";
 	$scope.onLogin = function onLogin(){
