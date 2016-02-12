@@ -1,4 +1,9 @@
-<h1> this is login </h1>
-<p>
-    rabble rabbles
-</p>
+<div ng-controller="LoginController">	
+	<form name="loginForm">
+		<input type="text" ng-model="user" required/>
+		
+		The username : {{user}} is {{available?'available':'not available'}}	
+		
+		<button ng-click="login()" ng-show="loginForm.$valid">Login</button>
+	</form>
+</div>
