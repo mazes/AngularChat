@@ -12,5 +12,8 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
             templateUrl: "createroom/createroom.html",
             controller: "CreateRoomController"
 
+        }).when("/chat", {
+            templateUrl: "chat/chat.html",
+            controller: "ChatController"
         });
 }]);
