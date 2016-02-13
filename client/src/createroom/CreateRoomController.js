@@ -8,11 +8,11 @@ function CreateRoomController($scope, $http, $location, ChatResource){
 			room: undefined,
 			pass: undefined,
 			topic: $scope.topic,
-			name: "raggroom"
 		};
-		console.log($scope.topic);
 		ChatResource.joinRoom($scope.room, function(success, reason){
-			
+			if(!success){
+				console.log(reason);
+			}
 		});
 	};
 }]);

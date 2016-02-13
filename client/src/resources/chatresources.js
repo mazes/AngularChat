@@ -27,7 +27,7 @@ function ChatResource(){
 		getRoomList: function getRoomList(){
 			socket.emit("rooms");
 			socket.on("roomlist", function(data){
-				return = data;
+				return data;
 		});	
 			/*Should get called to receive a list of available rooms. There are no parameters. The server responds by emitting the "roomlist" event
 			(the client needs to listen to this event from the server).*/
@@ -44,7 +44,6 @@ function ChatResource(){
 		},
 
 		joinRoom: function joinRoom(room, callback) {
-			console.log(room);
 			socket.emit("joinroom", room, callback);
 		}
 	}
