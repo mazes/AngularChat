@@ -26,12 +26,18 @@ function ChatResource(){
 
 		getRoomList: function getRoomList(){
 			socket.emit("rooms");
+			socket.on("roomlist", function(data){
+				return = data;
+		});	
 			/*Should get called to receive a list of available rooms. There are no parameters. The server responds by emitting the "roomlist" event
 			(the client needs to listen to this event from the server).*/
 		},
 
 		getUsers: function getUsers(){
 			socket.emit("users");
+			socket.on("userlist", function(data){
+				return data;
+			});
 			/*This should get called to get a list of all connected users.
 			There are no parameters for this function. The server will emit the "userlist"
 			 event back to the caller, containing a list of userids currently "logged in"*/
