@@ -1,4 +1,3 @@
-
 var uglify = require("gulp-uglifyjs");
 var jshint = require('gulp-jshint');
 var gulp = require('gulp');
@@ -6,10 +5,14 @@ var connect = require('gulp-connect');
 
 gulp.task('default', ['webserver']);
 
-gulp.task('lint', function() {
-  return gulp.src('src/*.js')
+gulp.task('jshint', function() {
+    return gulp.src([
+	'**/*.js',
+	'!node_modules/**/*'
+    ])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('default'))
 });
 
 gulp.task('uglify', function() {
