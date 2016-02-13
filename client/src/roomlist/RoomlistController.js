@@ -6,11 +6,17 @@ function listUsers($scope, $http, $locatopm, ChatResource){
 	$scope.users = [];
 	$scope.rooms = [];
 	$scope.userList = function userList(){
-		$scope.users = ChatResource.getUsers();
-		$scope.$apply();
+		ChatResource.getUsers();
+		socket.on("userlist", function(data){
+			$scope.users = data;
+			$scope.$apply();
+		});
 	},
 	$scope.getRooms = function getRooms(){
-		$scope.rooms = ChatResource.getRoomList();
-		$scope.$apply();
+		ChatResource.getRoomList();
+		socket.on("roomlist", function(data){
+			$scope.rooms = data;
+			$scope.$apply();
+		});	
 	};
 }]);

@@ -1,12 +1,13 @@
 <div ng-init="getRooms()"></div>
 	<h1>Roomlist</h1>
-	<ul class="list-group">
-		<li href="#" ng-repeat="room in rooms" class="list-group-item"> {{room.topic}}</li>
+	<ul>
+		<li ng-repeat="room in rooms" class="list-group-item"> {{room.topic}}</li>
+
 	</ul>
 </div>
 <div ng-init="userList()">
-	<h1>Users</h1>
-	<ul class="list-group">
+	<h2>Users</h2>
+	<ul>
 		<li ng-repeat="user in users" class="list-group-item"> {{user}}</li>
 	</ul>
-<div>
+</div>
