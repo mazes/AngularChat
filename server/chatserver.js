@@ -1,6 +1,6 @@
-var express = require('express'), 
-app = express(), 
-http = require('http'), 
+var express = require('express'),
+app = express(),
+http = require('http'),
 server = http.createServer(app),
 io = require('socket.io').listen(server);
 
@@ -40,7 +40,7 @@ io.sockets.on('connection', function (socket) {
 		var pass = joinObj.pass;
 		var accepted = true;
 		var reason;
-
+	console.log(rooms[room]);
 		//If the room does not exist
 		if(rooms[room] === undefined) {
 			rooms[room] = new Room();
@@ -50,6 +50,7 @@ io.sockets.on('connection', function (socket) {
 			if(pass !== undefined) {
 				rooms[room].setPassword(pass);
 			}
+				console.log(rooms[room]);
 			//Keep track of the room in the user object.
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
@@ -93,13 +94,14 @@ io.sockets.on('connection', function (socket) {
 				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 				io.sockets.emit('servermessage', "join", room, socket.username);
 			}
+			console.log(rooms[room]);
 			fn(false, reason);
 		}
 	});
 
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendmsg', function (data) {
-		
+
 		var userAllowed = false;
 
 		//Check if user is allowed to send message.

@@ -1,6 +1,9 @@
-<h1>Roomlist</h1>
-<span>{{rooms}}</span>
-
+<div ng-init="getRooms()"></div>
+	<h1>Roomlist</h1>
+	<ul>
+		<li ng-repeat="room in rooms"> {{room.topic}}</li>
+	</ul>
+</div>
 <div ng-init="userList()">
 	<h2>Users</h2>
 	<ul>

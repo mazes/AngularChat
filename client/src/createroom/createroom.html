@@ -4,9 +4,9 @@
     <form>
         <fieldset class="form-group">
             <label for="roomTopic">Chatroom Topic</label>
-            <input type="text" class="form-control" ng-model="topic" id="roomTopic" placeholder="Leave blank for no topic">
+            <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic" placeholder="Leave blank for no topic">
         </fieldset>
     </form>
+    <button type="button" id="createroom" ng-click="createRoom()">Create Room</button>
 
-    <span>{{topic}}</span>
 </div>

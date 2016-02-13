@@ -24,7 +24,8 @@ function ChatResource(){
 			  If a new room is being created, the message "updatechat" is also emitted.
 			*/
 
-		getRoomList: function getRoomList(callback){
+		getRoomList: function getRoomList(){
+			socket.emit("rooms");
 			/*Should get called to receive a list of available rooms. There are no parameters. The server responds by emitting the "roomlist" event
 			(the client needs to listen to this event from the server).*/
 		},
@@ -36,8 +37,9 @@ function ChatResource(){
 			 event back to the caller, containing a list of userids currently "logged in"*/
 		},
 
-		joinRoom: function joinRoom() {
-
+		joinRoom: function joinRoom(room, callback) {
+			console.log(room);
+			socket.emit("joinroom", room, callback);
 		}
 	}
 });

@@ -4,12 +4,19 @@ angular.module("angularChat").controller("RoomListController",
 ["$scope", "$http", "$location", "ChatResource",
 function listUsers($scope, $http, $locatopm, ChatResource){
 	$scope.users = [];
+	$scope.rooms = [];
 	$scope.userList = function userList(){
-		console.log("userlisttop");
 		ChatResource.getUsers();
-				socket.on("userlist", function(data){
-					$scope.users = data;
-					$scope.$apply;
-				});
+		socket.on("userlist", function(data){
+			$scope.users = data;
+			$scope.$apply();
+		});
+	},
+	$scope.getRooms = function getRooms(){
+		ChatResource.getRoomList();
+		socket.on("roomlist", function(data){
+			$scope.rooms = data;
+			$scope.$apply();
+		});	
 	};
 }]);
