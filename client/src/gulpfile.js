@@ -3,6 +3,7 @@ var jshint = require('gulp-jshint');
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 
+
 gulp.task('default', ['webserver']);
 
 gulp.task('jshint', function() {
@@ -16,9 +17,9 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('uglify', function() {
-  return gulp.src(['src/*.js', 'src/login/LoginController.js'])
+  return gulp.src(['*.js', '**/*.js', '!node_modules/**/*'])
     .pipe(uglify())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('../build'));
 });
 
 gulp.task('webserver', function() {
@@ -26,4 +27,3 @@ gulp.task('webserver', function() {
     port: 8008
     });
 });
-
