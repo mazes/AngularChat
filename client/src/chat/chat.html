@@ -1,16 +1,16 @@
 <ng-include src="'header.html'"></ng-include>
-<div>
-    <h1 class="customHeading">{{currentUser}} is chatting to {{chatter}}</h1>
+<div ng-init="getMessages()">
+    <h1 class="customHeading">{{currentUser}} is chatting in room {{chatter}}</h1>
 	<ul class="list-group">
-		<li ng-repeat="message in chat" style="list-style:none;">[{{message.timestamp}}-{{message.user}}] {{message.message}}</li>
+		<li ng-repeat="message in currentRoom.messageHistory" style="list-style:none;">[{{message.timestamp}}-{{message.nick}}] {{message.message}}</li>
 	</ul>
-    <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message">
-    <button class="btn btn-primary">Send</button>
+    <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message">
+    <button class="btn btn-primary" type="button" id="sendmessage" ng-click="sendMessage()">Send</button>
     <button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
 </div>
 <div>
 	<span>users in room</span>
 	<ul class="list-group">
-		<li ng-repeat="room in chattee">{{room.user}}</li>
+		<li ng-repeat="user in currentRoom.users">{{user}}</li>
 	</ul>
 </div>

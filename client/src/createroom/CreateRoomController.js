@@ -3,7 +3,7 @@
 angular.module("angularChat").controller("CreateRoomController",
 ["$scope","$routeParams", "$http", "$location", "ChatResource",
 function CreateRoomController($scope, $routeParams, $http, $location, ChatResource){
-	$scope.currentUser = $routeParams.username;
+	$scope.currentUser = ChatResource.getUser();
 	$scope.createRoom = function createRoom(){
 		$scope.currentUser = $routeParams.username;
 		$scope.room = {
@@ -15,8 +15,7 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 			if(!success){
 				console.log(reason);
 			}else{
-				$location.url('/chat/'+ $scope.currentUser +'/' + $scope.name);
-				console.log("location.url " + '/chat/'+ $scope.currentUser +'/' + $scope.name);
+				$location.url('/chat/' + $scope.name);
 				$scope.$apply();
 			}
 		});
