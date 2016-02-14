@@ -3,10 +3,11 @@
 
     <form>
         <fieldset class="form-group">
-            <label for="roomTopic">Chatroom Topic</label>
-            <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic" placeholder="Leave blank for no topic">
+            <label for="roomTopic" class="customHeading">Chatroom Topic</label><br>
+            <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic"
+                style="width:80%; display:inline;" placeholder="Leave blank for no topic">
+                <button type="button" class="btn btn-primary" id="createroom" ng-click="createRoom()">
+                    Create Room</button>
         </fieldset>
     </form>
-    <button type="button" id="createroom" ng-click="createRoom()">Create Room</button>
-
 </div>
