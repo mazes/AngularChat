@@ -44,6 +44,16 @@ function ChatResource(){
 			a callback function, accepting a single boolean parameter, stating if the message could be sent or not. 
 			The server will then emit the "recv_privatemsg" event to the user which should receive the message.
 			*/
+		},
+
+		leaveChat: function leaveChat(room){
+			console.log(room);
+			socket.emit("partroom", room);
+			/*
+			Used when a user wants to leave a room. Parameters: a single string, i.e. the ID of the room which the user is leaving.
+			The server will then emit the "updateusers" event to the remaining users in the room, and a "servermessage" with the 
+			first parameter set to "part".
+			*/
 		}
 	}
 });
