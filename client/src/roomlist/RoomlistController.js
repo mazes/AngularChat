@@ -15,10 +15,29 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 	},
 	$scope.getRooms = function getRooms(){
 		ChatResource.getRoomList();
-		socket.on("roomlist", function(data, a, b){
+		socket.on("roomlist", function(data){
 			$scope.rooms = data;
 			$scope.$apply();
-			console.log($scope.rooms, a, b);
+			console.log($scope.rooms);
 		});	
-	};
+	},
+	$scope.joinRoom = function joinRoom(theRoom){
+		var room ={
+			room: theRoom,
+			pass: undefined
+		};
+		console.log(room, "the room");
+		ChatResource.joinRoom(room, function(success, reason){
+		if(!success){
+				console.log(reason);
+		}else{
+			console.log("joinroom: " + success);
+			$location.url('/chat/'+ $routeParams.username +'/' + theRoom);
+			$scope.$apply();
+		}
+		});
+	},
+	$scope.sendPrivate = function sendPrivate(user){
+		$location.url('/chat/private/' + $routeParams.username + '/' + user);
+	}
 }]);

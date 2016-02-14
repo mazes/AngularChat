@@ -1,9 +1,16 @@
 <ng-include src="'header.html'"></ng-include>
 <div>
-    <h1 class="customHeading">{{user}} is chatting to {{chatter}}</h1>
+    <h1 class="customHeading">{{currentUser}} is chatting to {{chatter}}</h1>
 	<ul class="list-group">
 		<li ng-repeat="message in chat" style="list-style:none;">[{{message.timestamp}}-{{message.user}}] {{message.message}}</li>
 	</ul>
     <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message">
     <button class="btn btn-primary">Send</button>
+    <button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
+</div>
+<div>
+	<span>users in room</span>
+	<ul class="list-group">
+		<li ng-repeat="room in chattee">{{room.user}}</li>
+	</ul>
 </div>
