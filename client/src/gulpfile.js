@@ -13,7 +13,7 @@ gulp.task('jshint', function() {
     ])
     .pipe(jshint())
     .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('uglify', function() {

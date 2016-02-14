@@ -18,6 +18,6 @@ function login($scope, $http, $location, ChatResource){
 				$location.url('/roomlist');
 				$scope.$apply();
 			}
-		})
+		});
 	};
 }]);
