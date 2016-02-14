@@ -18,11 +18,14 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 		socket.on("roomlist", function(data){
 			$scope.rooms = data;
 			$scope.$apply();
-			console.log($scope.rooms);
 		});	
 	},
 	$scope.joinRoom = function joinRoom(theRoom, roomobj){
-		ChatResource.joinRoom(roomobj, function(success, reason){
+		var room = {
+			room: theRoom,
+			pass: undefined
+		};
+		ChatResource.joinRoom(room, function(success, reason){
 		if(!success){
 				console.log(reason);
 		}else{

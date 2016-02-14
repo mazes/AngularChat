@@ -1,6 +1,6 @@
 <ng-include src="'header.html'"></ng-include>
 <div ng-init="getMessages()">
-    <h1 class="customHeading">{{currentUser}} is chatting in room {{chatter}}</h1>
+    <h1 class="customHeading">{{currentUser}} is chatting in room {{roomName}}</h1>
 	<ul class="list-group">
 		<li ng-repeat="message in currentRoom.messageHistory" style="list-style:none;">[{{message.timestamp}}-{{message.nick}}] {{message.message}}</li>
 	</ul>
