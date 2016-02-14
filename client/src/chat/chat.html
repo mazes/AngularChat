@@ -8,3 +8,9 @@
     <button class="btn btn-primary">Send</button>
     <button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
 </div>
+<div>
+	<span>users in room</span>
+	<ul class="list-group">
+		<li ng-repeat="room in chattee">{{room.user}}</li>
+	</ul>
+</div>
