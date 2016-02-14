@@ -18,6 +18,23 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 		socket.on("roomlist", function(data){
 			$scope.rooms = data;
 			$scope.$apply();
+			console.log($scope.rooms);
 		});	
-	};
+	},
+	$scope.joinRoom = function joinRoom(theRoom){
+		var room ={
+			room: theRoom,
+			pass: undefined
+		};
+		console.log(room, "the room");
+		ChatResource.joinRoom(room, function(success, reason){
+		if(!success){
+				console.log(reason);
+		}else{
+			console.log("joinroom: " + success);
+			$location.url('/chat/'+ $routeParams.username +'/' + theRoom);
+			$scope.$apply();
+		}
+		});
+	}
 }]);

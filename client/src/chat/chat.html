@@ -7,3 +7,9 @@
     <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message">
     <button class="btn btn-primary">Send</button>
 </div>
+<div>
+	<span>users in room</span>
+	<ul class="list-group">
+		<li ng-repeat="room in chattee">{{room.user}}</li>
+	</ul>
+</div>
