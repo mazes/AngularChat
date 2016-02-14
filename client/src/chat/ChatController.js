@@ -10,4 +10,4 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource){
 	$scope.leaveChat = function leaveChat(){
 		ChatResource.leaveChat($scope.chatter);
 	}
-}
+}]);
