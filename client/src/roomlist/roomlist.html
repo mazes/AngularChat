@@ -8,6 +8,6 @@
 <div ng-init="userList()">
 	<h2>Users</h2>
 	<ul>
-		<li ng-repeat="user in users" class="list-group-item"><a ng-href="#/chat/{{currentUser}}/{{user}}">{{user}}</a></li>
+		<li ng-repeat="user in users" class="list-group-item" ng-click="sendPrivate(user)">{{user}}</li>
 	</ul>
 </div>

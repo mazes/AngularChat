@@ -11,9 +11,11 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
         }).when("/createroom/:username", {
             templateUrl: "createroom/createroom.html",
             controller: "CreateRoomController"
-
         }).when("/chat/:username/:chattee", {
             templateUrl: "chat/chat.html",
+            controller: "ChatController"
+        }).when("/chat/private/:username/:chattee", {
+            templateUrl: "chat/privateChat.html",
             controller: "ChatController"
         }).otherwise("/login", {
             templateUrl: "login/login.html",

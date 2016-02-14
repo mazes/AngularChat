@@ -32,5 +32,8 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 			$scope.$apply();
 		}
 		});
+	},
+	$scope.sendPrivate = function sendPrivate(user){
+		$location.url('/chat/private/' + $routeParams.username + '/' + user);
 	}
 }]);
