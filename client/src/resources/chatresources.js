@@ -2,6 +2,7 @@
 
 angular.module("angularChat").factory("ChatResource",
 function ChatResource(){
+	var room = {};
 	return {
 		login: function login(user, pass, callback){
 			socket.emit("adduser", user, callback);
@@ -29,6 +30,7 @@ function ChatResource(){
 		},
 
 		sendMessage: function sendMessage(message){
+			console.log("sendmessage resource:" ,message);
 			socket.emit("sendmsg", message);
 			/*Should get called when a user wants to send a message to a room. Parameters: a single object containing
 			 the following properties: {roomName: "the room identifier", msg: "The message itself, only the first 200 chars are 
@@ -47,13 +49,18 @@ function ChatResource(){
 		},
 
 		leaveChat: function leaveChat(room){
-			console.log(room);
 			socket.emit("partroom", room);
 			/*
 			Used when a user wants to leave a room. Parameters: a single string, i.e. the ID of the room which the user is leaving.
 			The server will then emit the "updateusers" event to the remaining users in the room, and a "servermessage" with the 
 			first parameter set to "part".
 			*/
-		}
+		},
+        getRoom: function getRoom(){
+            return room;
+        },
+        setRoom: function setRoom(value){
+            room = value;
+        }
 	}
 });

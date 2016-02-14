@@ -15,7 +15,6 @@ function login($scope, $http, $location, ChatResource){
 			}
 			else{
 				$location.url('/roomlist/'+ $scope.currentUser);
-				console.log($scope.currentUser, "scopecurrentuser");
 				$scope.$apply();
 			}
 		})
