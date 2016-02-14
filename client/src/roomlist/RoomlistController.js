@@ -15,10 +15,9 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 	},
 	$scope.getRooms = function getRooms(){
 		ChatResource.getRoomList();
-		socket.on("roomlist", function(data, a, b){
+		socket.on("roomlist", function(data){
 			$scope.rooms = data;
 			$scope.$apply();
-			console.log($scope.rooms, a, b);
 		});	
 	};
 }]);
