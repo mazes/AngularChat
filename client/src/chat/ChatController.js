@@ -3,13 +3,13 @@
 angular.module("angularChat").controller("ChatController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource",
 function ChatController($scope, $routeParams, $http, $location, ChatResource){
-	$scope.chatter = $routeParams.chattee;
-	$scope.currentUser = $routeParams.username;
+	$scope.chatter = $routeParams.room;
+	$scope.currentUser = ChatResource.getUser();
 	$scope.currentRoom = ChatResource.getRoom();
 
 	$scope.leaveChat = function leaveChat(){
 		ChatResource.leaveChat($scope.chatter);
-		$location.url("/roomlist/" + $routeParams.username);
+		$location.url("/roomlist");
 	},
 
 	$scope.sendMessage = function sendMessage(){

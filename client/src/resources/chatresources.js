@@ -3,6 +3,7 @@
 angular.module("angularChat").factory("ChatResource",
 function ChatResource(){
 	var room = {};
+	var currentUser = {};
 	return {
 		login: function login(user, pass, callback){
 			socket.emit("adduser", user, callback);
@@ -56,11 +57,18 @@ function ChatResource(){
 			first parameter set to "part".
 			*/
 		},
+
         getRoom: function getRoom(){
             return room;
         },
         setRoom: function setRoom(value){
             room = value;
+        },
+        getUser: function getUser(){
+        	return currentUser;
+        },
+        setUser: function setUser(user){
+        	currentUser = user;
         }
 	}
 });

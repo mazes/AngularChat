@@ -3,7 +3,7 @@
 angular.module("angularChat").controller("RoomListController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource",
 function listUsers($scope, $routeParams, $http, $location, ChatResource){
-	$scope.currentUser = $routeParams.username;
+	$scope.currentUser = ChatResource.getUser();
 	$scope.users = [];
 	$scope.rooms = [];
 	$scope.userList = function userList(){
@@ -28,12 +28,12 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 		}else{
 			console.log("joinroom: " + success);
 			ChatResource.setRoom(roomobj);
-			$location.url('/chat/'+ $routeParams.username +'/' + theRoom);
+			$location.url('/chat/' + theRoom);
 			$scope.$apply();
 		}
 		});
 	},
 	$scope.sendPrivate = function sendPrivate(user){
-		$location.url('/chat/private/' + $routeParams.username + '/' + user);
+		$location.url('/chat/private/' + user);
 	}
 }]);

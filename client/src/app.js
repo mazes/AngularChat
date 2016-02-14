@@ -5,16 +5,16 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
     $routeProvider.when("/", {
             templateUrl: "login/login.html",
             controller: "LoginController"
-        }).when("/roomlist/:username", {
+        }).when("/roomlist", {
         	templateUrl: "roomlist/roomlist.html",
         	controller: "RoomListController"
-        }).when("/createroom/:username", {
+        }).when("/createroom", {
             templateUrl: "createroom/createroom.html",
             controller: "CreateRoomController"
-        }).when("/chat/:username/:chattee", {
+        }).when("/chat/:room", {
             templateUrl: "chat/chat.html",
             controller: "ChatController"
-        }).when("/chat/private/:username/:chattee", {
+        }).when("/chat/private/:chattee", {
             templateUrl: "chat/privateChat.html",
             controller: "ChatController"
         }).otherwise("/login", {
