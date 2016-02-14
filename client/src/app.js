@@ -15,5 +15,8 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
         }).when("/chat/:currentUser/:username", {
             templateUrl: "chat/chat.html",
             controller: "ChatController"
+        }).otherwise("/login", {
+            templateUrl: "login/login.html",
+            controller: "LoginController"
         });
 }]);
