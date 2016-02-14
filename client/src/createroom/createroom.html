@@ -1,6 +1,6 @@
-<div ng-controller="CreateRoomController">
+<ng-include src="'header.html'"></ng-include>
     <h1 class="customHeading">Create a chatroom</h1>
-
+    <input type="text" ng-model="name">Name</input>
     <form>
         <fieldset class="form-group">
             <label for="roomTopic" class="customHeading">Chatroom Topic</label><br>
@@ -10,4 +10,8 @@
                     Create Room</button>
         </fieldset>
     </form>
+<<<<<<< HEAD
+=======
+    <button type="button" id="createroom" ng-click="createRoom()">Create Room</button>
+>>>>>>> 60d41e851e6632d7d443782c73c890c76c80d958
 </div>
