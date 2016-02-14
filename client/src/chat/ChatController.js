@@ -11,4 +11,19 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource){
 		ChatResource.leaveChat($scope.chatter);
 		$location.url("/roomlist/" + $routeParams.username);
 	}
+
+	$scope.sendPrivateMessage = function sendPrivateMessage(user){
+		console.log("inside ", $scope.message, user);
+		$scope.privateMessage = {
+			nick: user,
+			message: $scope.message
+		}
+		ChatResource.sendPrivateMessage($scope.privateMessage, function(success){
+			if(!success){
+				console.log("Did not work");
+			}else{
+				console.log("worked")
+			}
+		});
+	}
 }]);

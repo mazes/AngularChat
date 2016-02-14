@@ -47,7 +47,6 @@ function ChatResource(){
 		},
 
 		leaveChat: function leaveChat(room){
-			console.log(room);
 			socket.emit("partroom", room);
 			/*
 			Used when a user wants to leave a room. Parameters: a single string, i.e. the ID of the room which the user is leaving.
