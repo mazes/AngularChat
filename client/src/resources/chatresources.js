@@ -6,23 +6,6 @@ function ChatResource(){
 		login: function login(user, pass, callback){
 			socket.emit("adduser", user, callback);
 		},
-			/*Should get called when a user wants to join a room.
-			Note that the API supports a password-protected room,
-			however this is optional, i.e. your implementation doesn't
-			have to support this. Parameters: an object containing the
-			following properties: { room: "the id of the room, undefined
-			if the user is creating a new room", pass: "a room password - not required"}
-			 a callback function which accepts two parameters: a boolean parameter,
-			  stating if the request was successful or not. and if not
-			  (due to password protection or because of something else),
-			  the reason why the join wasn't successful.
-			  The server responds by emitting the following events:
-			  "updateusers" (to all participants in the room), "updatetopic"
-			  (to the newly joined user, not required to handle this),
-			  "servermessage" with the first parameter set to "join"
-			  ( to all participants in the room, informing about the newly added user).
-			  If a new room is being created, the message "updatechat" is also emitted.
-			*/
 
 		getRoomList: function getRoomList(){
 			socket.emit("rooms");
@@ -37,9 +20,30 @@ function ChatResource(){
 			 event back to the caller, containing a list of userids currently "logged in"*/
 		},
 
-		joinRoom: function joinRoom(room, callback) {
-			console.log(room);
+		joinRoom: function newRoom(room, callback) {
 			socket.emit("joinroom", room, callback);
+		},
+
+		setTopic: function setTopic(obj, callback){
+			socket.emit("settopic", obj, callback);
+		},
+
+		sendMessage: function sendMessage(message){
+			socket.emit("sendmsg", message);
+			/*Should get called when a user wants to send a message to a room. Parameters: a single object containing
+			 the following properties: {roomName: "the room identifier", msg: "The message itself, only the first 200 chars are 
+			 considered valid" } The server will then emit the "updatechat" event, after the message has been accepted.
+			 */
+		},
+
+		sendPrivateMessage: function sendPrivateMessage(obj, callback){
+			socket.emit("privatemsg", obj, callback);
+			/*
+			Used if the user wants to send a private message to another user. Parameters: an object containing the 
+			following properties: {nick: "the userid which the message should be sent to", message: "The message itself" } 
+			a callback function, accepting a single boolean parameter, stating if the message could be sent or not. 
+			The server will then emit the "recv_privatemsg" event to the user which should receive the message.
+			*/
 		}
 	}
 });
