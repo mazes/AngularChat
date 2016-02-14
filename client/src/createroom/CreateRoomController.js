@@ -16,6 +16,7 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 				console.log(reason);
 			}else{
 				$location.url('/chat/' + $scope.name);
+				ChatResource.setRoom($scope.room);
 				$scope.$apply();
 			}
 		});

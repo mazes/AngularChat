@@ -39,9 +39,11 @@ function ChatResource(){
 		},
 
         getRoom: function getRoom(){
+        	console.log("getting room: ", room);
             return room;
         },
         setRoom: function setRoom(value){
+        	console.log("setting room as: ", value);
             room = value;
         },
         getUser: function getUser(){

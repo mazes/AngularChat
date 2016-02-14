@@ -26,14 +26,12 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 			pass: undefined
 		};
 		ChatResource.joinRoom(room, function(success, reason){
-		if(!success){
+			if(!success){
 				console.log(reason);
-		}else{
-			console.log("joinroom: " + success);
-			ChatResource.setRoom(roomobj);
-			$location.url('/chat/' + theRoom);
-			$scope.$apply();
-		}
+			}else{
+				ChatResource.setRoom(roomobj);
+				$location.url('/chat/' + theRoom);
+			}
 		});
 	},
 	$scope.sendPrivate = function sendPrivate(user){

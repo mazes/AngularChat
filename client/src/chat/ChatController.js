@@ -6,6 +6,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.roomName = $routeParams.room;
 	$scope.currentUser = ChatResource.getUser();
 	$scope.currentRoom = ChatResource.getRoom();
+	$scope.chat = $scope.currentRoom.messageHistory;
 
 	$scope.leaveChat = function leaveChat(){
 		ChatResource.leaveChat($scope.roomName);
