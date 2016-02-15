@@ -30,7 +30,6 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 					console.log("failed to set topic");
 				}
 			});
-			$scope.$apply();
 		}
 
 		});

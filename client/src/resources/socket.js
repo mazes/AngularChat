@@ -17,7 +17,7 @@ angular.module("angularChat").factory('socket', function ($rootScope) {
             callback.apply(socket, args);
           }
         });
-      })
+      });
     }
   };
 });

@@ -21,7 +21,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.leaveChat = function leaveChat(){
 		ChatResource.leaveChat($scope.roomName);
 		$location.url("/roomlist");
-	},
+	};
 
 	$scope.sendMessage = function sendMessage(){
 		var messageObj = {
@@ -29,9 +29,9 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 			msg: $scope.message
 		};
 		ChatResource.sendMessage(messageObj);
-	},
+	};
 
 	$scope.getMessages = function getMessages(){
 		$scope.currentRoom = ChatResource.getRoom();
-	}
+	};
 }]);

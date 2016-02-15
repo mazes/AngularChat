@@ -33,6 +33,7 @@ function ChatResource(socket){
 		},
 
 		sendPrivateMessage: function sendPrivateMessage(obj, callback){
+			console.log("sending privat ChatResource");
 			socket.emit("privatemsg", obj, callback);
 		},
 
@@ -54,7 +55,7 @@ function ChatResource(socket){
         	currentUser = user;
         },
         addpMessage: function addpMessage(message){
-        	alert("Calling addpmessage");
+        	console.log("calling add message ChatResource");
         	pMessages.push(message);
         },
         getpMessages: function getpMessages(){

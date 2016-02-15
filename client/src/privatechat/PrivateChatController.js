@@ -15,6 +15,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 		};
 		ChatResource.addpMessage(pmessage);
 		$scope.chat = $scope.getMessages();
+		$scope.$apply();
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
@@ -30,9 +31,10 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 				console.log("worked");
 			}
 		});
-	},
+	};
 
 	$scope.getMessages = function getMessages(){
+		console.log("getMessages PrivateChatController");
 		var usermessages = ChatResource.getpMessages();
 		var messages = [];
 		for(var i = 0; i < usermessages.length; i++){
@@ -41,5 +43,5 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 			}
 		}
 		return messages;
-	}
+	};
 }]);

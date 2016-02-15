@@ -11,13 +11,15 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 		socket.on("userlist", function(data){
 			$scope.users = data;
 		});
-	},
+	};
+
 	$scope.getRooms = function getRooms(){
 		ChatResource.getRoomList();
 		socket.on("roomlist", function(data){
 			$scope.rooms = data;
 		});	
-	},
+	};
+
 	$scope.joinRoom = function joinRoom(theRoom, roomobj){
 		var room = {
 			room: theRoom,
@@ -31,8 +33,9 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 				$location.url('/chat/' + theRoom);
 			}
 		});
-	},
+	};
+	
 	$scope.sendPrivate = function sendPrivate(user){
 		$location.url('/chat/private/' + user);
-	}
+	};
 }]);
