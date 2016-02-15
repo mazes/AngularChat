@@ -15,8 +15,8 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
             templateUrl: "chat/chat.html",
             controller: "ChatController"
         }).when("/chat/private/:chattee", {
-            templateUrl: "chat/privateChat.html",
-            controller: "ChatController"
+            templateUrl: "privatechat/privateChat.html",
+            controller: "PrivateChatController"
         }).otherwise("/login", {
             templateUrl: "login/login.html",
             controller: "LoginController"

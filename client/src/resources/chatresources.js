@@ -4,6 +4,8 @@ angular.module("angularChat").factory("ChatResource",
 function ChatResource(){
 	var room = {};
 	var currentUser = {};
+	var pMessages = [];
+
 	return {
 		login: function login(user, pass, callback){
 			socket.emit("adduser", user, callback);
@@ -37,7 +39,6 @@ function ChatResource(){
 		leaveChat: function leaveChat(room){
 			socket.emit("partroom", room);
 		},
-
         getRoom: function getRoom(){
         	console.log("getting room: ", room);
             return room;
@@ -51,6 +52,13 @@ function ChatResource(){
         },
         setUser: function setUser(user){
         	currentUser = user;
+        },
+        addpMessage: function addpMessage(message){
+        	alert("Calling addpmessage");
+        	pMessages.push(message);
+        },
+        getpMessages: function getpMessages(){
+        	return pMessages;
         }
 	};
 });
