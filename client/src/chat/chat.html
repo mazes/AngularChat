@@ -13,7 +13,10 @@
 </div>
 <div>
 	<span>users in room</span>
+	<div ng-hide="actionBar">
+    	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block;">{{command}}</button>
+	</div>
 	<ul class="list-group">
-		<li ng-repeat="user in users">{{user}}</li>
+		<li ng-repeat="user in users" ng-if="user != currentUser" ng-click="operations(user)">{{user}}</li>
 	</ul>
 </div>

@@ -4,14 +4,13 @@ angular.module("angularChat").controller("RoomListController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket",
 function listUsers($scope, $routeParams, $http, $location, ChatResource, socket){
 	$scope.currentUser = ChatResource.getUser();
-	$scope.users = [];
-	$scope.rooms = [];
 	$scope.userList = function userList(){
 		ChatResource.getUsers();
 		socket.on("userlist", function(data){
 			$scope.users = data;
 		});
 	};
+	$scope.users = $scope.userList();
 
 	$scope.getRooms = function getRooms(){
 		ChatResource.getRoomList();
@@ -19,6 +18,7 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 			$scope.rooms = data;
 		});	
 	};
+	$scope.rooms = $scope.getRooms();
 
 	$scope.joinRoom = function joinRoom(theRoom, roomobj){
 		var room = {
@@ -30,12 +30,18 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 				console.log(reason);
 			}else{
 				ChatResource.setRoom(roomobj);
+				var messageObj = {
+					roomName: theRoom,
+					msg: $scope.currentUser + " has joined the room!"
+				};
+				ChatResource.sendMessage(messageObj);
 				$location.url('/chat/' + theRoom);
 			}
 		});
 	};
-	
+
 	$scope.sendPrivate = function sendPrivate(user){
 		$location.url('/chat/private/' + user);
 	};
+
 }]);

@@ -7,7 +7,6 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.currentUser = ChatResource.getUser();
 	
 	socket.on("recv_privatemsg", function(user, message){
-		console.log("private message rec");
 		var pmessage = {
 			receiver: $scope.chattee,
 			sender: user,
@@ -19,7 +18,6 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
-		console.log("send private message");
 		$scope.privateMessage = {
 			nick: user,
 			message: $scope.message
@@ -34,7 +32,6 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	};
 
 	$scope.getMessages = function getMessages(){
-		console.log("getMessages PrivateChatController");
 		var usermessages = ChatResource.getpMessages();
 		var messages = [];
 		for(var i = 0; i < usermessages.length; i++){
