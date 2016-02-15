@@ -1,9 +1,10 @@
 "use strict";
 
 angular.module("angularChat").controller("CreateRoomController",
-["$scope","$routeParams", "$http", "$location", "ChatResource",
-function CreateRoomController($scope, $routeParams, $http, $location, ChatResource){
+["$scope","$routeParams", "$http", "$location", "ChatResource", "socket",
+function CreateRoomController($scope, $routeParams, $http, $location, ChatResource, socket){
 	$scope.currentUser = ChatResource.getUser();
+
 	$scope.createRoom = function createRoom(){
 		$scope.currentUser = $routeParams.username;
 		$scope.room = {
@@ -11,14 +12,27 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 			pass: undefined,
 			topic: $scope.topic
 		};
-			ChatResource.joinRoom($scope.room, function(success, reason){
-			if(!success){
-				console.log(reason);
-			}else{
-				$location.url('/chat/' + $scope.name);
-				ChatResource.setRoom($scope.room);
-				$scope.$apply();
-			}
+
+		ChatResource.joinRoom($scope.room, function(success, reason){
+		if(!success){
+			console.log(reason);
+		}else{
+			$location.url('/chat/' + $scope.name);
+			ChatResource.setRoom($scope.room);
+			var topic = {
+				room: $scope.name,
+				topic: $scope.topic
+			};
+			ChatResource.setTopic(topic, function(success){
+				if(success){
+					console.log("topic set");
+				}else{
+					console.log("failed to set topic");
+				}
+			});
+			$scope.$apply();
+		}
+
 		});
 	};
 }]);

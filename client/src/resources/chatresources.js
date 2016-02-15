@@ -1,7 +1,7 @@
 "use strict";
 
-angular.module("angularChat").factory("ChatResource",
-function ChatResource(){
+angular.module("angularChat").factory("ChatResource", ["socket",
+function ChatResource(socket){
 	var room = {};
 	var currentUser = {};
 	var pMessages = [];
@@ -61,4 +61,4 @@ function ChatResource(){
         	return pMessages;
         }
 	};
-});
+}]);
