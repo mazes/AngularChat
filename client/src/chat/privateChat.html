@@ -1,6 +1,6 @@
 <ng-include src="'header.html'"></ng-include>
 <div>
-    <h1 class="customHeading">{{currentUser}} is chatting to {{chatter}}</h1>
+    <h1 class="customHeading">{{currentUser}} is chatting with {{chatter}}</h1>
 	<ul class="list-group">
 		<li ng-repeat="message in chat" style="list-style:none;">[{{message.timestamp}}-{{message.user}}] {{message.message}}</li>
 	</ul>

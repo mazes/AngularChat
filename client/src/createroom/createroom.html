@@ -1,17 +1,16 @@
 <ng-include src="'header.html'"></ng-include>
-    <h1 class="customHeading">Create a chatroom</h1>
-    <input type="text" ng-model="name">Name</input>
+    <h1 class="customHeading">Create a Chatroom</h1>
+
     <form>
         <fieldset class="form-group">
-            <label for="roomTopic" class="customHeading">Chatroom Topic</label><br>
+            <label for="name" class="customHeaderLabel">Chatroom Name</label><br>
+            <input name="name" type="text" class="form-control" ng-model="name" id="name"
+                style="width:80%; display:inline;" placeholder="Enter name"><br>
+            <label for="roomTopic" class="customHeaderLabel">Chatroom Topic</label><br>
             <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic"
                 style="width:80%; display:inline;" placeholder="Leave blank for no topic">
                 <button type="button" class="btn btn-primary" id="createroom" ng-click="createRoom()">
                     Create Room</button>
         </fieldset>
     </form>
-<<<<<<< HEAD
-=======
-    <button type="button" id="createroom" ng-click="createRoom()">Create Room</button>
->>>>>>> 60d41e851e6632d7d443782c73c890c76c80d958
 </div>
