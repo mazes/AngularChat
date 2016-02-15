@@ -6,8 +6,6 @@ angular.module("angularChat").controller("ChatController",
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.currentRoom = ChatResource.getRoom();
-		$scope.chat = $scope.currentRoom.messageHistory;
-		$scope.users = $scope.currentRoom.users;
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
 		$scope.actionBar = true;
 		$scope.userAction = {
@@ -22,16 +20,18 @@ angular.module("angularChat").controller("ChatController",
 		});
 
 		socket.on("updateusers", function(data, users){
-			console.log("updusrs currentRoom: ",$scope.currentRoom);
+			console.log("updateusers ", data, users);
 			$scope.users = users;
 		});
 
 		socket.on('kicked', function(room, user, currentUser){
-			var messageObj = {
-				roomName: room,
-				msg: currentUser + " kicked " + user + " from the room!"
-			};
-			ChatResource.sendMessage(messageObj);
+			if(currentUser === $scope.currentUser){
+				var messageObj = {
+					roomName: room,
+					msg: currentUser + " kicked " + user + " from the room!"
+				};
+				ChatResource.sendMessage(messageObj);
+			}
 		});
 
 		$scope.leaveChat = function leaveChat(){
@@ -65,36 +65,36 @@ angular.module("angularChat").controller("ChatController",
 				case "Kick":
 					ChatResource.kickUser($scope.userAction, function(success){
 						if(success){
-							console.log("user has been kicked");
+							console.log($scope.userAction.user +" has been kicked by " + $scope.userAction.operator);
 						}else{
-							console.log("user was not kicked");
+							console.log($scope.userAction.user +" was not kicked by " + $scope.userAction.operator);
 						}
 					});
 					break;
 				case "Ban":
 					ChatResource.banUser($scope.userAction, function(success){
 						if(success){
-							console.log("user has been banned");
+							console.log($scope.userAction.user + " has been banned by " + $scope.userAction.operator);
 						}else{
-							console.log("user was not banned");
+							console.log($scope.userAction.user + " was not banned by " + $scope.userAction.operator);
 						}
 					});
 					break;
 				case "Op":
 					ChatResource.giveOP($scope.userAction, function(success){
 						if(success){
-							console.log("user has been granted OP");
+							console.log($scope.userAction.user + " has been granted OP by " + $scope.userAction.operator);
 						}else{
-							console.log("user was not granted OP");
+							console.log($scope.userAction.user + " was not granted OP by " + $scope.userAction.operator);
 						}
 					});
 					break;
 				case "DeOp":
 					ChatResource.banUser($scope.userAction, function(success){
 						if(success){
-							console.log("user has been deOpped");
+							console.log($scope.userAction.user + " has been deOpped by " + $scope.userAction.operator);
 						}else{
-							console.log("user was not deopped");
+							console.log($scope.userAction.user + " was not deopped by " + $scope.userAction.operator);
 						}
 					});
 					break;
@@ -103,5 +103,19 @@ angular.module("angularChat").controller("ChatController",
 			}
 			$scope.actionBar = true;
 		};
-	});
+
+		$scope.getMessages = function getMessages(){
+			console.log("getmessages");
+
+			console.log("currentroom ",ChatResource.getRoom());
+		};
+		/*$scope.$on("$destroy", function(){
+			socket.off("kicked", function(success){
+				if(success){
+					console.log("destroy kicked");
+				}else{
+					console.log("failed destroy kicked");
+				}
+			});
+		});*/
 }]);

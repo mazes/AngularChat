@@ -5,7 +5,7 @@ angular.module("angularChat").controller("PrivateChatController",
 function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
 	$scope.chattee = $routeParams.chattee;
 	$scope.currentUser = ChatResource.getUser();
-	
+
 	socket.on("recv_privatemsg", function(user, message){
 		var pmessage = {
 			receiver: $scope.chattee,
@@ -14,7 +14,6 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 		};
 		ChatResource.addpMessage(pmessage);
 		$scope.chat = $scope.getMessages();
-		$scope.$apply();
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
@@ -24,21 +23,44 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 		};
 		ChatResource.sendPrivateMessage($scope.privateMessage, function(success){
 			if(!success){
-				console.log("Did not work");
+				console.log("did not work");
 			}else{
-				console.log("worked");
+				$scope.date = new Date();
+				var pmessage = {
+					receiver: $scope.chattee,
+					sender: $scope.currentUser,
+					message: $scope.message,
+					date: $scope.date
+				};
+				ChatResource.addpMessage(pmessage);
+				$scope.chat = $scope.getMessages();
 			}
 		});
 	};
 
 	$scope.getMessages = function getMessages(){
 		var usermessages = ChatResource.getpMessages();
+		console.log(usermessages)
 		var messages = [];
+		console.log("Current user:", $scope.currentUser);
 		for(var i = 0; i < usermessages.length; i++){
-			if(usermessages[i].sender === $scope.currentUser){
+			if(usermessages[i].sender === $scope.currentUser || usermessages[i].receiver === $scope.currentUser){
 				messages.push(usermessages[i]);
 			}
 		}
+		console.log(messages);
 		return messages;
 	};
+
+	$scope.$on("$destroy", function(){
+		socket.off("recv_privatemsg", function(success){
+			if(success){
+				console.log("destroy");
+			}else{
+				console.log("failed destroy");
+			}
+		});
+	});
+
+	$scope.chat = $scope.getMessages();
 }]);

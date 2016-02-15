@@ -5,7 +5,7 @@
  		{{currentRoom.topic}}
     </div>
 	<ul class="list-group">
-		<li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp}}-{{message.nick}}] {{message.message}}</li>
+		<li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-{{message.nick}}] {{message.message}}</li>
 	</ul>
     <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message">
     <button class="btn btn-primary" type="button" id="sendmessage" ng-click="sendMessage()">Send</button>
@@ -14,7 +14,7 @@
 <div>
 	<span>users in room</span>
 	<div ng-hide="actionBar">
-    	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block;">{{command}}</button>
+    	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
 	</div>
 	<ul class="list-group">
 		<li ng-repeat="user in users" ng-if="user != currentUser" ng-click="operations(user)">{{user}}</li>
