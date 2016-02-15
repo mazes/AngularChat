@@ -2,7 +2,7 @@
 <div>
     <h1 class="customHeading">{{currentUser}} is chatting with {{chattee}}</h1>
 	<ul class="list-group">
-		<li ng-repeat="message in chat" style="list-style:none;">[{{message.timestamp}}-{{message.user}}] {{message.message}}</li>
+		<li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
 	</ul>
     <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message">
     <button class="btn btn-primary" type="button" id="sendPrivate" ng-click="sendPrivateMessage(chattee)">Send</button>

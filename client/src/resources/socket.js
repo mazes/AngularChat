@@ -20,7 +20,7 @@ angular.module("angularChat").factory('socket', function ($rootScope) {
       });
     },
     off: function (eventName, listener){
-      socket.off(eventName, function(){
+      socket.removeAllListeners(eventName, function(){
         var args = arguments;
         $rootScope.$apply(function () {
           if (callback) {
