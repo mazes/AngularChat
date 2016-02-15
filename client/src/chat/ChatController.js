@@ -4,6 +4,7 @@ angular.module("angularChat").controller("ChatController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route",
 function ChatController($scope, $routeParams, $http, $location, ChatResource, $route){
 	$scope.roomName = $routeParams.room;
+	$scope.chattee = $routeParams.chattee;
 	$scope.currentUser = ChatResource.getUser();
 	$scope.currentRoom = ChatResource.getRoom();
 	$scope.chat = $scope.currentRoom.messageHistory;
@@ -39,7 +40,6 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	},
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
-		console.log("inside ", $scope.message, user);
 		$scope.privateMessage = {
 			nick: user,
 			message: $scope.message
