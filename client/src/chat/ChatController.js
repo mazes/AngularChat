@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("ChatController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route",
-function ChatController($scope, $routeParams, $http, $location, ChatResource, $route){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket",
+function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
 	$scope.roomName = $routeParams.room;
 	$scope.chattee = $routeParams.chattee;
 	$scope.currentUser = ChatResource.getUser();
@@ -13,13 +13,10 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	//listen for message updates
 	socket.on("updatechat", function(data, messages){
 			$scope.chat = messages;
-			$scope.$apply();
-	});	
+	});
 
-	socket.on("updateusers", function(data, users, b){
+	socket.on("updateusers", function(data, users){
 		$scope.users = users;
-		$scope.$apply();
-		console.log("scopeusers: " ,$scope.users);
 	});
 
 	$scope.leaveChat = function leaveChat(){

@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("RoomListController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource",
-function listUsers($scope, $routeParams, $http, $location, ChatResource){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket",
+function listUsers($scope, $routeParams, $http, $location, ChatResource, socket){
 	$scope.currentUser = ChatResource.getUser();
 	$scope.users = [];
 	$scope.rooms = [];
@@ -10,14 +10,12 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource){
 		ChatResource.getUsers();
 		socket.on("userlist", function(data){
 			$scope.users = data;
-			$scope.$apply();
 		});
 	},
 	$scope.getRooms = function getRooms(){
 		ChatResource.getRoomList();
 		socket.on("roomlist", function(data){
 			$scope.rooms = data;
-			$scope.$apply();
 		});	
 	},
 	$scope.joinRoom = function joinRoom(theRoom, roomobj){
