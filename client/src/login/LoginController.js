@@ -11,7 +11,6 @@ function login($scope, $http, $location, ChatResource){
 		ChatResource.login($scope.currentUser, $scope.pass, function(success){
 			if(!success){
 				$scope.errorMessage = "Login failed!";
-				$scope.$apply();
 			}
 			else{
 				ChatResource.setUser($scope.currentUser);
