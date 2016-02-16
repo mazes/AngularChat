@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module("angularChat").controller("ChatController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket",
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "ngToast",
 	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, ngToast){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
@@ -39,7 +39,7 @@ angular.module("angularChat").controller("ChatController",
 			ChatResource.addpMessage(message, user, $scope.currentUser);
 			var message = ChatResource.getNewestPmessage();
 			if(message.receiver === $scope.currentUser){
-        		ngToast.create('a toast message...');
+        		ngToast.create('You received a private message from: ' + message.sender);
         		//$location.url('/chat/private/' + message.sender);
 			}
 		});
