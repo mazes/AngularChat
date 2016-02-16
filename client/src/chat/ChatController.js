@@ -1,12 +1,13 @@
 "use strict";
 
 angular.module("angularChat").controller("ChatController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout",
+	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
 		$scope.actionBar = true;
+		$scope.isServerMsg = true;
 		$scope.userAction = {
 			room: $scope.roomName,
 			user: undefined,
@@ -35,10 +36,9 @@ angular.module("angularChat").controller("ChatController",
 		};
 
 		socket.on("recv_privatemsg", function(user, message){
-			console.log("Receiving message");
 			ChatResource.addpMessage(message, user, $scope.currentUser);
 		});
-		//listen for message updates
+
 		socket.on("updatechat", function(data, messages){
 				$scope.chat = messages;
 		});
@@ -48,26 +48,46 @@ angular.module("angularChat").controller("ChatController",
 			$scope.ops = ops;
 		});
 
-		socket.on("servermessage", function(data, a, b){
-			console.log("data, a, b: ", data, a, b);
+		socket.on("servermessage", function(action, room, user){
+			var message ="";
+			switch(action){
+				case "join":
+					message = user + " has joined the room!";
+					break;
+				case "part":
+					message = user + " has left the room!";
+					break;
+				case "quit":
+					message = user + "has disconnected from server!";
+			}
+			$scope.sendServerMessage(message);
 		});
 
 		socket.on("kicked", function(room, user, currentUser){
-			if(currentUser === $scope.currentUser){
-				var messageObj = {
-					roomName: room,
-					msg: currentUser + " kicked " + user + " from the room!"
-				};
-				ChatResource.sendMessage(messageObj);
+			var message = currentUser + " kicked " + user + " from the room!";
+			$scope.sendServerMessage(message);
+		});
+
+		socket.on("banned", function(room, user, currentUser){
+			if(user === $scope.currentUser){
+				$location.url("/roomlist");
+				return;
 			}
+			var message = currentUser + " banned " + user + " from the room!";
+			$scope.sendServerMessage(message);
+		});
+
+		socket.on("opped", function(room, user, currentUser){
+			var message = currentUser + " gave  " + user + " op rights!";
+			$scope.sendServerMessage(message);
+		});
+
+		socket.on("deopped", function(room, user, currentUser){
+			var message = currentUser + " stripped  " + user + " op rights!";
+			$scope.sendServerMessage(message);
 		});
 
 		$scope.leaveChat = function leaveChat(){
-			var messageObj = {
-				roomName: $scope.roomName,
-				msg: $scope.currentUser + " has left the room!"
-			};
-			ChatResource.sendMessage(messageObj);
 			ChatResource.leaveChat($scope.roomName);
 			$location.url("/roomlist");
 		};
@@ -132,6 +152,14 @@ angular.module("angularChat").controller("ChatController",
 			$scope.actionBar = true;
 		};
 
+		$scope.sendServerMessage = function sendServerMessage(message){
+			$scope.serverMessage = message;
+			$scope.isServerMsg = false;
+			$timeout(function(){
+           		$scope.isServerMsg = true;
+       		}, 5000);
+		};
+
 		$scope.$on("$destroy", function(){
 			socket.off("recv_privatemsg", function(success){
 				if(success){
@@ -141,7 +169,8 @@ angular.module("angularChat").controller("ChatController",
 				}
 			});
 		});
-		$scope.$on("$destroy", function(){
+
+		/*$scope.$on("$destroy", function(){
 			socket.off("kicked", function(success){
 				if(success){
 					console.log("destroy");
@@ -150,4 +179,14 @@ angular.module("angularChat").controller("ChatController",
 				}
 			});
 		});
+
+		$scope.$on("$destroy", function(){
+			socket.off("servermessage", function(success){
+				if(success){
+					console.log("destroy");
+				}else{
+					console.log("failed destroy");
+				}
+			});
+		});*/
 }]);

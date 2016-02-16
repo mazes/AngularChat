@@ -42,11 +42,11 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 
 	$scope.currUserChattee = function currUserChattee(usermessage){
 		return usermessage.sender === $scope.currentUser &&  usermessage.receiver === $routeParams.chattee;
-	}
+	};
 
 	$scope.chatteeCurrUser = function chatteeCurrUser(usermessage){
-		return usermessage.sender === $routeParams.chattee &&  usermessage.receiver === $scope.currentUser
-	}
+		return usermessage.sender === $routeParams.chattee &&  usermessage.receiver === $scope.currentUser;
+	};
 
 	$scope.$on("$destroy", function(){
 		socket.off("recv_privatemsg", function(success){
