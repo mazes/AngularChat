@@ -67,8 +67,15 @@ function ChatResource(socket){
         setUser: function setUser(user){
         	currentUser = user;
         },
-        addpMessage: function addpMessage(message){
-        	pMessages.push(message);
+        addpMessage: function addpMessage(message, sender, receiver){
+        	var date = new Date();
+			var pmsg = {
+				receiver: receiver,
+				sender: sender,
+				message: message,
+				date: date
+			};
+        	pMessages.push(pmsg);
         },
         getpMessages: function getpMessages(){
         	return pMessages;

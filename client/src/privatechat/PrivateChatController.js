@@ -7,8 +7,9 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.currentUser = ChatResource.getUser();
 
 	socket.on("recv_privatemsg", function(user, message){
-		console.log("inside recv message with: " + message + " user:" + user + " currentuser: " + $scope.currentUser);
-		$scope.addpMessage(message, user, $scope.currentUser);
+		console.log("Receiving message");
+		ChatResource.addpMessage(message, user, $scope.currentUser);
+		$scope.chat = $scope.getMessages();
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
@@ -21,33 +22,31 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 			if(!success){
 				console.log("did not work");
 			}else{
-				$scope.addpMessage($scope.message, $scope.currentUser, user);
+				ChatResource.addpMessage($scope.message, $scope.currentUser, user);
+				$scope.chat = $scope.getMessages();
 			}
 		});
 	};
 
-	$scope.addpMessage = function(message, sender, receiver){
-		$scope.date = new Date();
-		var pmessage = {
-			receiver: receiver,
-			sender: sender,
-			message: message,
-			date: $scope.date
-		};
-		ChatResource.addpMessage(pmessage);
-		$scope.chat = $scope.getMessages();
-	};
-
 	$scope.getMessages = function getMessages(){
 		var usermessages = ChatResource.getpMessages();
+		console.log(usermessages);
 		var messages = [];
 		for(var i = 0; i < usermessages.length; i++){
-			if(usermessages[i].sender === $scope.currentUser || usermessages[i].receiver === $scope.currentUser){
+			if($scope.currUserChattee(usermessages[i]) || $scope.chatteeCurrUser(usermessages[i])){
 				messages.push(usermessages[i]);
 			}
 		}
 		return messages;
 	};
+
+	$scope.currUserChattee = function currUserChattee(usermessage){
+		return usermessage.sender === $scope.currentUser &&  usermessage.receiver === $routeParams.chattee;
+	}
+
+	$scope.chatteeCurrUser = function chatteeCurrUser(usermessage){
+		return usermessage.sender === $routeParams.chattee &&  usermessage.receiver === $scope.currentUser
+	}
 
 	$scope.$on("$destroy", function(){
 		socket.off("recv_privatemsg", function(success){
