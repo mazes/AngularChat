@@ -1,6 +1,13 @@
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
 body {
-    padding-top: 2px;
+    padding-top: 5px;
     background-color: #eeeeee;
+
 }
 
 .customHeading {
@@ -8,7 +15,9 @@ body {
     font-weight: bolder;
     font-variant: small-caps;
     font-style: oblique;
-    margin-top: 15px;
+    text-align: center;
+    margin-top: 30px;
+    border-bottom: solid lightgray 1px;
 }
 
 .customHeaderLabel {
@@ -20,8 +29,16 @@ body {
     margin-bottom: -2px;
 }
 
+.customHeadingNoMargin {
+    font-family: fantasy;
+    font-weight: bolder;
+    font-variant: small-caps;
+    font-style: oblique;
+}
+
 #container {
-    margin-left: 10px;
+    position: relative;
+    height: 99%;
     background-color: #ffffff;
     border: solid lightgray 1px;
     border-radius: 20px;
@@ -38,7 +55,47 @@ body {
 
 }
 
+.messageField {
+    width: 66%;
+    margin-top: -7px;
+    padding-right: 10px;
+    word-wrap: break-word;
+    border-right: solid lightgray 1px;
+    overflow: auto;
+    height: 68%;
+    position: absolute;
+}
+
+#usersInRoom {
+    position: absolute;
+    top: 123px;
+    right: 0;
+    width: 27%;
+}
+
+.inputField {
+    position: absolute;
+    padding-top: 10px;
+    bottom: 60px;
+    left: 0;
+    width: 90%;
+    height: 50px;
+    margin-left: 5%;
+    border-top: solid lightgray 1px;
+}
+
+.navFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0px;
+    padding-top: 12px;
+    text-align: center;
+    width: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
 .chatList {
-    height: 90%;
     overflow: auto;
 }
