@@ -29,7 +29,6 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 			if(!success){
 				console.log(reason);
 			}else{
-				ChatResource.setRoom(roomobj);
 				var messageObj = {
 					roomName: theRoom,
 					msg: $scope.currentUser + " has joined the room!"

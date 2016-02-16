@@ -55,21 +55,18 @@ function ChatResource(socket){
 			socket.emit("deop", action, callback);
 		},
 
-        getRoom: function getRoom(){
-            return room;
-        },
-        setRoom: function setRoom(value){
-            room = value;
-        },
         getUser: function getUser(){
         	return currentUser;
         },
+
         setUser: function setUser(user){
         	currentUser = user;
         },
+
         addpMessage: function addpMessage(message){
         	pMessages.push(message);
         },
+        
         getpMessages: function getpMessages(){
         	return pMessages;
         }

@@ -5,13 +5,32 @@ angular.module("angularChat").controller("ChatController",
 	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
-		$scope.currentRoom = ChatResource.getRoom();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
 		$scope.actionBar = true;
 		$scope.userAction = {
 			room: $scope.roomName,
 			user: undefined,
 			operator: $scope.currentUser
+		};
+
+		$scope.getMessages = function getMessages(){
+			$scope.chat = $scope.currentRoom.messageHistory;
+			$scope.users = $scope.currentRoom.users;
+		};
+
+		$scope.init = function init(){
+			console.log("init");
+			ChatResource.getRoomList();
+			socket.on("roomlist", function(data){
+				for (var key in data) {
+					if (data.hasOwnProperty(key)) {
+						if(key === $scope.roomName){
+							$scope.currentRoom = data[key];
+							$scope.getMessages();
+						}
+					}
+				}
+			});	
 		};
 
 		//listen for message updates
@@ -103,19 +122,4 @@ angular.module("angularChat").controller("ChatController",
 			}
 			$scope.actionBar = true;
 		};
-
-		$scope.getMessages = function getMessages(){
-			console.log("getmessages");
-
-			console.log("currentroom ",ChatResource.getRoom());
-		};
-		/*$scope.$on("$destroy", function(){
-			socket.off("kicked", function(success){
-				if(success){
-					console.log("destroy kicked");
-				}else{
-					console.log("failed destroy kicked");
-				}
-			});
-		});*/
 }]);

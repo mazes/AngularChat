@@ -1,7 +1,7 @@
 <ng-include src="'header.html'"></ng-include>
 <ng-include src="'footer.html'"></ng-include>
 <h1 class="customHeading">{{currentUser}} is chatting in room {{roomName}}</h1>
-<div ng-init="getMessages()" class="messageField">
+<div ng-init="init()" class="messageField">
 
     <div id="roomTopic">
  		{{currentRoom.topic}}

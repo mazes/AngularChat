@@ -29,5 +29,5 @@ angular.module("angularChat").factory('socket', function ($rootScope) {
         });
       });
     }
-  }
+  };
 });

@@ -40,7 +40,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 
 	$scope.getMessages = function getMessages(){
 		var usermessages = ChatResource.getpMessages();
-		console.log(usermessages)
+		console.log(usermessages);
 		var messages = [];
 		console.log("Current user:", $scope.currentUser);
 		for(var i = 0; i < usermessages.length; i++){
