@@ -6,7 +6,7 @@
     <div id="roomTopic">
  		{{currentRoom.topic}}
     </div>
-
+    <div  id="servermessage" ng-hide="isServerMsg" class="animate-show animate-hide">{{serverMessage}}</div>
     <ul class="list-group">
         <li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-<span style="color:skyblue;">{{message.nick}}</span>] {{message.message}}</li>
     </ul>

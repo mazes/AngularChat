@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngToast"]);
+angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ngToast"]);
 angular.module("angularChat").config(["$routeProvider", function($routeProvider) {
     $routeProvider.when("/", {
             templateUrl: "login/login.html",
@@ -17,7 +17,7 @@ angular.module("angularChat").config(["$routeProvider", function($routeProvider)
         }).when("/chat/private/:chattee", {
             templateUrl: "privatechat/privateChat.html",
             controller: "PrivateChatController"
-        }).otherwise("/login", {
+        }).otherwise("/", {
             templateUrl: "login/login.html",
             controller: "LoginController"
         });
