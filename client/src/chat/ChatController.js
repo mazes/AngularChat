@@ -113,41 +113,38 @@ angular.module("angularChat").controller("ChatController",
 				case "Kick":
 					ChatResource.kickUser($scope.userAction, function(success){
 						if(success){
-							console.log($scope.userAction.user +" has been kicked by " + $scope.userAction.operator);
-						}else{
-							console.log($scope.userAction.user +" was not kicked by " + $scope.userAction.operator);
+							var message = "You need op rights for this operation!";
+							$scope.sendServerMessage(message);
 						}
 					});
 					break;
 				case "Ban":
 					ChatResource.banUser($scope.userAction, function(success){
 						if(success){
-							console.log($scope.userAction.user + " has been banned by " + $scope.userAction.operator);
-						}else{
-							console.log($scope.userAction.user + " was not banned by " + $scope.userAction.operator);
+							var message = "You need op rights for this operation!";
+							$scope.sendServerMessage(message);
 						}
 					});
 					break;
 				case "Op":
 					ChatResource.giveOP($scope.userAction, function(success){
-						if(success){
-							console.log($scope.userAction.user + " has been granted OP by " + $scope.userAction.operator);
-						}else{
-							console.log($scope.userAction.user + " was not granted OP by " + $scope.userAction.operator);
+						if(!success){
+							var message = "You need op rights for this operation!";
+							$scope.sendServerMessage(message);
 						}
 					});
 					break;
 				case "DeOp":
 					ChatResource.deOP($scope.userAction, function(success){
-						if(success){
-							console.log($scope.userAction.user + " has been deOpped by " + $scope.userAction.operator);
-						}else{
-							console.log($scope.userAction.user + " was not deopped by " + $scope.userAction.operator);
+						if(!success){
+							var message = "You need op rights for this operation!";
+							$scope.sendServerMessage(message);
 						}
 					});
 					break;
 				default:
-					console.log("no switch command");
+					var message = "For some reason request failed!";
+					$scope.sendServerMessage(message);
 			}
 			$scope.actionBar = true;
 		};
@@ -169,24 +166,4 @@ angular.module("angularChat").controller("ChatController",
 				}
 			});
 		});
-
-		/*$scope.$on("$destroy", function(){
-			socket.off("kicked", function(success){
-				if(success){
-					console.log("destroy");
-				}else{
-					console.log("failed destroy");
-				}
-			});
-		});
-
-		$scope.$on("$destroy", function(){
-			socket.off("servermessage", function(success){
-				if(success){
-					console.log("destroy");
-				}else{
-					console.log("failed destroy");
-				}
-			});
-		});*/
 }]);
