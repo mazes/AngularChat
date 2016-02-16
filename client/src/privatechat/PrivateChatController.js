@@ -7,16 +7,12 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.currentUser = ChatResource.getUser();
 
 	socket.on("recv_privatemsg", function(user, message){
-		var pmessage = {
-			receiver: $scope.chattee,
-			sender: user,
-			message: message
-		};
-		ChatResource.addpMessage(pmessage);
-		$scope.chat = $scope.getMessages();
+		console.log("inside recv message with: " + message + " user:" + user + " currentuser: " + $scope.currentUser);
+		$scope.addpMessage(message, user, $scope.currentUser);
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
+		console.log("Inside send pm with user:" + user + " currentuser: " + $scope.currentUser);
 		$scope.privateMessage = {
 			nick: user,
 			message: $scope.message
@@ -25,30 +21,31 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 			if(!success){
 				console.log("did not work");
 			}else{
-				$scope.date = new Date();
-				var pmessage = {
-					receiver: $scope.chattee,
-					sender: $scope.currentUser,
-					message: $scope.message,
-					date: $scope.date
-				};
-				ChatResource.addpMessage(pmessage);
-				$scope.chat = $scope.getMessages();
+				$scope.addpMessage($scope.message, $scope.currentUser, user);
 			}
 		});
 	};
 
+	$scope.addpMessage = function(message, sender, receiver){
+		$scope.date = new Date();
+		var pmessage = {
+			receiver: receiver,
+			sender: sender,
+			message: message,
+			date: $scope.date
+		};
+		ChatResource.addpMessage(pmessage);
+		$scope.chat = $scope.getMessages();
+	};
+
 	$scope.getMessages = function getMessages(){
 		var usermessages = ChatResource.getpMessages();
-		console.log(usermessages)
 		var messages = [];
-		console.log("Current user:", $scope.currentUser);
 		for(var i = 0; i < usermessages.length; i++){
 			if(usermessages[i].sender === $scope.currentUser || usermessages[i].receiver === $scope.currentUser){
 				messages.push(usermessages[i]);
 			}
 		}
-		console.log(messages);
 		return messages;
 	};
 
