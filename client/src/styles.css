@@ -45,6 +45,8 @@ body {
     box-shadow: 6px 5px 7px -7px grey;
     padding: 10px 40px 30px 35px;
     width: 70%;
+    min-width: 800px;
+    overflow: auto;
     margin:auto;
     position: relative;
 }
@@ -101,4 +103,9 @@ body {
 
 .chatList {
     overflow: auto;
+}
+
+.navbar-left {
+    float:left;
+    margin-left: 15px;
 }
