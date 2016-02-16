@@ -6,6 +6,7 @@
   "dependencies": {
     "angular": "^1.5.0",
     "gulp-uglifyjs": "^0.6.2",
+    "jquery": "^2.2.0",
     "socket.io-client": "^0.9.16"
   },
   "devDependencies": {
