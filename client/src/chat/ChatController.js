@@ -33,6 +33,10 @@ angular.module("angularChat").controller("ChatController",
 			});	
 		};
 
+		socket.on("recv_privatemsg", function(user, message){
+			console.log("Receiving message");
+			ChatResource.addpMessage(message, user, $scope.currentUser);
+		});
 		//listen for message updates
 		socket.on("updatechat", function(data, messages){
 				$scope.chat = messages;
@@ -122,4 +126,14 @@ angular.module("angularChat").controller("ChatController",
 			}
 			$scope.actionBar = true;
 		};
+
+		$scope.$on("$destroy", function(){
+			socket.off("recv_privatemsg", function(success){
+				if(success){
+					console.log("destroy");
+				}else{
+					console.log("failed destroy");
+				}
+			});
+		});
 }]);
