@@ -16,6 +16,7 @@ angular.module("angularChat").controller("ChatController",
 		$scope.getMessages = function getMessages(){
 			$scope.chat = $scope.currentRoom.messageHistory;
 			$scope.users = $scope.currentRoom.users;
+			$scope.ops = $scope.currentRoom.ops;
 		};
 
 		$scope.init = function init(){
@@ -42,12 +43,16 @@ angular.module("angularChat").controller("ChatController",
 				$scope.chat = messages;
 		});
 
-		socket.on("updateusers", function(data, users){
-			console.log("updateusers ", data, users);
+		socket.on("updateusers", function(data, users, ops){
 			$scope.users = users;
+			$scope.ops = ops;
 		});
 
-		socket.on('kicked', function(room, user, currentUser){
+		socket.on("servermessage", function(data, a, b){
+			console.log("data, a, b: ", data, a, b);
+		});
+
+		socket.on("kicked", function(room, user, currentUser){
 			if(currentUser === $scope.currentUser){
 				var messageObj = {
 					roomName: room,
@@ -113,7 +118,7 @@ angular.module("angularChat").controller("ChatController",
 					});
 					break;
 				case "DeOp":
-					ChatResource.banUser($scope.userAction, function(success){
+					ChatResource.deOP($scope.userAction, function(success){
 						if(success){
 							console.log($scope.userAction.user + " has been deOpped by " + $scope.userAction.operator);
 						}else{
@@ -129,6 +134,15 @@ angular.module("angularChat").controller("ChatController",
 
 		$scope.$on("$destroy", function(){
 			socket.off("recv_privatemsg", function(success){
+				if(success){
+					console.log("destroy");
+				}else{
+					console.log("failed destroy");
+				}
+			});
+		});
+		$scope.$on("$destroy", function(){
+			socket.off("kicked", function(success){
 				if(success){
 					console.log("destroy");
 				}else{

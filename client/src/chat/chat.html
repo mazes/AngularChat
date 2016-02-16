@@ -18,7 +18,9 @@
     	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
 	</div>
 	<ul class="list-group">
-		<li ng-repeat="user in users" ng-if="user != currentUser" ng-click="operations(user)"
+		<li ng-repeat="op in ops" ng-click="operations(op)"
+          class="list-group-item customHeadingNoMargin">+{{op}}</li>
+		<li ng-repeat="user in users" ng-click="operations(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
 	</ul>
 </div>
