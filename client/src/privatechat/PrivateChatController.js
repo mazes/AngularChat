@@ -7,43 +7,48 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 	$scope.currentUser = ChatResource.getUser();
 
 	socket.on("recv_privatemsg", function(user, message){
-		console.log("private message rec");
-		$scope.date = new Date();
 		var pmessage = {
 			receiver: $scope.chattee,
 			sender: user,
-			message: message,
-			date: $scope.date
+			message: message
 		};
-		console.log(pmessage);
 		ChatResource.addpMessage(pmessage);
 		$scope.chat = $scope.getMessages();
 	});
 
 	$scope.sendPrivateMessage = function sendPrivateMessage(user){
-		console.log("send private message");
 		$scope.privateMessage = {
 			nick: user,
 			message: $scope.message
 		};
 		ChatResource.sendPrivateMessage($scope.privateMessage, function(success){
 			if(!success){
-				console.log("Did not work");
+				console.log("did not work");
 			}else{
-				console.log("worked");
+				$scope.date = new Date();
+				var pmessage = {
+					receiver: $scope.chattee,
+					sender: $scope.currentUser,
+					message: $scope.message,
+					date: $scope.date
+				};
+				ChatResource.addpMessage(pmessage);
+				$scope.chat = $scope.getMessages();
 			}
 		});
 	};
 
 	$scope.getMessages = function getMessages(){
-		console.log("getMessages PrivateChatController");
 		var usermessages = ChatResource.getpMessages();
+		console.log(usermessages)
 		var messages = [];
+		console.log("Current user:", $scope.currentUser);
 		for(var i = 0; i < usermessages.length; i++){
 			if(usermessages[i].sender === $scope.currentUser || usermessages[i].receiver === $scope.currentUser){
 				messages.push(usermessages[i]);
 			}
 		}
+		console.log(messages);
 		return messages;
 	};
 

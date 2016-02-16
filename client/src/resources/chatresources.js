@@ -28,24 +28,37 @@ function ChatResource(socket){
 		},
 
 		sendMessage: function sendMessage(message){
-			console.log("sendmessage resource:" ,message);
 			socket.emit("sendmsg", message);
 		},
 
 		sendPrivateMessage: function sendPrivateMessage(obj, callback){
-			console.log("sending privat ChatResource");
 			socket.emit("privatemsg", obj, callback);
 		},
 
 		leaveChat: function leaveChat(room){
 			socket.emit("partroom", room);
 		},
+
+		kickUser: function kickUser(action, callback){
+			socket.emit("kick", action, callback);
+		},
+
+		banUser: function banUser(action, callback){
+			socket.emit("ban", action, callback);
+		},
+
+		giveOP: function giveOP(action, callback){
+			socket.emit("op", action, callback);
+		},
+
+		deOP: function deOP(action, callback){
+			socket.emit("deop", action, callback);
+		},
+
         getRoom: function getRoom(){
-        	console.log("getting room: ", room);
             return room;
         },
         setRoom: function setRoom(value){
-        	console.log("setting room as: ", value);
             room = value;
         },
         getUser: function getUser(){
@@ -55,7 +68,6 @@ function ChatResource(socket){
         	currentUser = user;
         },
         addpMessage: function addpMessage(message){
-        	console.log("calling add message ChatResource");
         	pMessages.push(message);
         },
         getpMessages: function getpMessages(){
