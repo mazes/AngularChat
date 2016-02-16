@@ -2,7 +2,7 @@
 
 angular.module("angularChat").controller("ChatController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
+	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, ngToast){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -36,7 +36,13 @@ angular.module("angularChat").controller("ChatController",
 		socket.on("recv_privatemsg", function(user, message){
 			console.log("Receiving message");
 			ChatResource.addpMessage(message, user, $scope.currentUser);
+			var message = ChatResource.getNewestPmessage();
+			if(message.receiver === $scope.currentUser){
+        		ngToast.create('a toast message...');
+        		//$location.url('/chat/private/' + message.sender);
+			}
 		});
+
 		//listen for message updates
 		socket.on("updatechat", function(data, messages){
 				$scope.chat = messages;
