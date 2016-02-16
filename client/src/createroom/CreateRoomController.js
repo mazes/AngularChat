@@ -14,24 +14,22 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 		};
 
 		ChatResource.joinRoom($scope.room, function(success, reason){
-		if(!success){
-			console.log(reason);
-		}else{
-			$location.url('/chat/' + $scope.name);
-			ChatResource.setRoom($scope.room);
-			var topic = {
-				room: $scope.name,
-				topic: $scope.topic
-			};
-			ChatResource.setTopic(topic, function(success){
-				if(success){
-					console.log("topic set");
-				}else{
-					console.log("failed to set topic");
-				}
-			});
-		}
-
+			if(!success){
+				console.log(reason);
+			}else{
+				$location.url('/chat/' + $scope.name);
+				var topic = {
+					room: $scope.name,
+					topic: $scope.topic
+				};
+				ChatResource.setTopic(topic, function(success){
+					if(success){
+						console.log("topic set");
+					}else{
+						console.log("failed to set topic");
+					}
+				});
+			}
 		});
 	};
 }]);
