@@ -1,5 +1,6 @@
 body {
     padding-top: 2px;
+    background-color: #eeeeee;
 }
 
 .customHeading {
@@ -21,11 +22,11 @@ body {
 
 #container {
     margin-left: 10px;
+    background-color: #ffffff;
     border: solid lightgray 1px;
     border-radius: 20px;
     box-shadow: 6px 5px 7px -7px grey;
     padding: 10px 40px 30px 35px;
-    height: 90%;
     width: 70%;
     margin:auto;
 }
@@ -35,4 +36,9 @@ body {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 
+}
+
+.chatList {
+    height: 90%;
+    overflow: auto;
 }
