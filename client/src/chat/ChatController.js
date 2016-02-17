@@ -63,7 +63,7 @@ angular.module("angularChat").controller("ChatController",
 		socket.on("updateusers", function(data, users, ops){
 			$scope.users = users;
 			$scope.ops = ops;
-			for (var op in $scope.ops){;
+			for (var op in $scope.ops){
 				if($scope.currentUser === op){
 					$scope.isOp = true;
 				}
@@ -140,22 +140,20 @@ angular.module("angularChat").controller("ChatController",
 			$scope.userAction.user = user;
 			ChatResource.unBanUser($scope.userAction, function(success){
 				if(success){
-					var message = "You un-banned user from room!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("You un-banned user from room!");
 					ChatResource.getRoomList();
-					var message = {
+					var pMessage = {
 						nick: user,
 						message: "I have un-banned you from room: " + $routeParams.room 
 					};
-					ChatResource.sendPrivateMessage(message, function(success){
+					ChatResource.sendPrivateMessage(pMessage, function(success){
 						if(success){
 							$scope.sendServerMessage("You have notified user that he is free to join the room");
 						}
 					});
 
 				}else{
-					var message = "You need op rights for this operation!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("You need op rights for this operation!");
 				}
 			});
 		};
@@ -168,38 +166,33 @@ angular.module("angularChat").controller("ChatController",
 				case "Kick":
 					ChatResource.kickUser($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "Ban":
 					ChatResource.banUser($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "Op":
 					ChatResource.giveOP($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "DeOp":
 					ChatResource.deOP($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				default:
-					var message = "For some reason request failed!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("For some reason request failed!");
 			}
 			$scope.actionBar = true;
 		};
@@ -223,7 +216,7 @@ angular.module("angularChat").controller("ChatController",
 		$scope.passwordTrue = function passwordTrue(){
 			$scope.setPassword = true;
 		};
-		
+
 		$scope.editTopic = function editTopic(){
 			var top = {
 				room: $routeParams.room,
@@ -284,7 +277,7 @@ angular.module("angularChat").controller("ChatController",
 								if(success){
 									$scope.sendServerMessage("You have sent the new password to other ops!");
 								}
-							})
+							});
 						}
 					}
 				}
