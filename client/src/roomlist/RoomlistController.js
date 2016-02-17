@@ -42,15 +42,8 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket,
 				closeOnConfirm: true,
 				animation: 'slide-from-top',
 				inputPlaceholder: 'Write something'
-			}, function(inputValue){
-				if (inputValue === false){
-					return false;
-				}
-
-				if (inputValue === '') {
-					sweet.showInputError('You need to write something!');
-					return false;
-				}
+			}, 
+			function(inputValue){
 				$scope.currentPassword = inputValue;
 				$scope.checkIfValid(inputValue, theRoom);
 			});
