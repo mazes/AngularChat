@@ -47,6 +47,10 @@ function ChatResource(socket){
 			socket.emit("ban", action, callback);
 		},
 
+		unBanUser: function unBanUser(action, callback){
+			socket.emit("unban", action, callback);
+		},
+		
 		giveOP: function giveOP(action, callback){
 			socket.emit("op", action, callback);
 		},
@@ -56,8 +60,15 @@ function ChatResource(socket){
 		},
 
 		disconnect: function disconnect(){
-			console.log("chatresource socket disconnect");
 			socket.disconnect();
+		},
+
+		setPassword: function setPassword(pass, callback){
+			socket.emit("setpassword", pass, callback);
+		},
+
+		removePassword: function removePassword(room, callback){
+			socket.emit("removepassword", room, callback);
 		},
 
         getUser: function getUser(){

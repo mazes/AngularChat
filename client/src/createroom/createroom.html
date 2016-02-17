@@ -9,7 +9,10 @@
                 style="width:80%; display:inline;" placeholder="Enter name"><br>
             <label for="roomTopic" class="customHeaderLabel">Chatroom Topic</label><br>
             <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic"
-                style="width:80%; display:inline;" placeholder="Leave blank for no topic">
+                style="width:80%; display:inline;" placeholder="Leave blank for no topic"><br>
+            <label for="pass" class="customHeaderLabel">Chatroom Password</label><br>
+            <input name="pass" type="text" class="form-control" ng-model="pass" id="roomPassword"
+                style="width:80%; display:inline;" placeholder="Leave blank for no password">
                 <button type="button" class="btn btn-primary" id="createroom" ng-click="createRoom()">
                     Create Room</button>
         </fieldset>

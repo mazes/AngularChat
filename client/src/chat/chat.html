@@ -1,20 +1,30 @@
 <ng-include src="'header.html'"></ng-include>
 <ng-include src="'footer.html'"></ng-include>
 <h1 class="customHeading">{{currentUser}} is chatting in room {{roomName}}</h1>
-<div id="roomTopic">
-        {{topic}}
-    <div ng-if="isOp">
-        <button type="button" ng-click="topicTrue()">Edit Topic</button><button type="button" ng-click="setPassword()">Set Password</button>
-    </div>
-</div>
 
 <div ng-init="init()" class="messageField">
 
-    <div ng-show="setTopic">
-    	<form name="addTopic" ng-submit="editTopic()">
-    		<input type="text" ng-model="newTopic" placeholder="write input" ng-keyup="$event.keyCode == 13 && editTopic()"/>
-   		</form>
-    </div>
+    <div id="roomTopic">
+ 		{{topic}}
+ 		<div ng-if="isOp">
+ 			<button type="button" ng-click="topicTrue()">Edit Topic</button>
+ 			<button type="button" ng-click="passwordTrue()">Set Password</button>
+ 			<button type="button" ng-click="removePassword()">Remove Password</button>
+ 		</div>
+ 		<div id="editinputs">
+    		<div ng-show="setTopic">
+    			<form name="addTopic" ng-submit="editTopic()">
+    				<input type="text" ng-model="newTopic" placeholder="new topic..." ng-keyup="$event.keyCode == 13 && editTopic()"/>
+    			</form>
+			</div>
+			<div ng-show="setPassword">
+    			<form name="setPass" ng-submit="editPassword()">
+    				<input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
+    			</form>
+			</div>
+		</div>
+	</div>
+
     <div  id="servermessage" ng-hide="isServerMsg" class="animate-show animate-hide">{{serverMessage}}</div>
     <ul>
         <li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-<span style="color:skyblue;">{{message.nick}}</span>] {{message.message}}</li>
@@ -31,6 +41,8 @@
           class="list-group-item customHeadingNoMargin">+{{op}}</li>
 		<li ng-repeat="user in users" ng-click="operations(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
+  		<li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
+          class="list-group-item customHeadingNoMargin">ban-{{banned}}</li>
 	</ul>
 </div>
 

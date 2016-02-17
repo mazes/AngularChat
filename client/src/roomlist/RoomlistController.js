@@ -27,6 +27,12 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 				return;
 			}
 		}
+		for (var op in roomobj.ops){
+			if(op === $scope.currentUser){
+				$location.url('/chat/' + theRoom);
+				return;
+			}
+		}
 		var room = {
 			room: theRoom,
 			pass: undefined
