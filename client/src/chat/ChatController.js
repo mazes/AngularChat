@@ -216,6 +216,14 @@ angular.module("angularChat").controller("ChatController",
        		}, 5000);
 		};
 
+		$scope.topicTrue = function topicTrue(){
+			$scope.setTopic = true;
+		};
+
+		$scope.passwordTrue = function passwordTrue(){
+			$scope.setPassword = true;
+		};
+		
 		$scope.editTopic = function editTopic(){
 			var top = {
 				room: $routeParams.room,
@@ -228,16 +236,9 @@ angular.module("angularChat").controller("ChatController",
 					console.log("failed to set topic");
 				}
 			});
+			$scope.newTopic = "";
 			$scope.addTopic.$setPristine();
 			$scope.setTopic = false;
-		};
-
-		$scope.topicTrue = function topicTrue(){
-			$scope.setTopic = true;
-		};
-
-		$scope.passwordTrue = function passwordTrue(){
-			$scope.setPassword = true;
 		};
 
 		$scope.editPassword = function editPassword(){
@@ -263,6 +264,7 @@ angular.module("angularChat").controller("ChatController",
 					}
 				}
 			});
+			$scope.newPassword = "";
 			$scope.setPass.$setPristine();
 			$scope.setPassword = false;
 		};
