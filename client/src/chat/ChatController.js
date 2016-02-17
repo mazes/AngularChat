@@ -1,8 +1,9 @@
 "use strict";
 
 angular.module("angularChat").controller("ChatController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout){
+
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "ngToast",
+	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, ngToast){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -44,6 +45,11 @@ angular.module("angularChat").controller("ChatController",
 
 		socket.on("recv_privatemsg", function(user, message){
 			ChatResource.addpMessage(message, user, $scope.currentUser);
+			var message = ChatResource.getNewestPmessage();
+			if(message.receiver === $scope.currentUser){
+        		ngToast.create('You received a private message from: ' + message.sender);
+        		//$location.url('/chat/private/' + message.sender);
+			}
 		});
 
 		socket.on("updatechat", function(data, messages){

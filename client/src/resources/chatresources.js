@@ -81,6 +81,10 @@ function ChatResource(socket){
         
         getpMessages: function getpMessages(){
         	return pMessages;
+        },
+
+        getNewestPmessage: function getNewestPmessage(){
+        	return pMessages[pMessages.length-1];
         }
 	};
 }]);
