@@ -203,10 +203,10 @@ angular.module("angularChat").controller("ChatController",
 		};
 
 		$scope.sendServerMessage = function sendServerMessage(message){
-			$scope.serverMessage = message;
-			$scope.isServerMsg = false;
+			$scope.serverMessages.push(message);
+			//$scope.$apply();
 			$timeout(function(){
-           		$scope.isServerMsg = true;
+           		$scope.serverMessages.shift();
        		}, 5000);
 		};
 

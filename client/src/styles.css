@@ -154,9 +154,10 @@ body {
 }
 
  /* Server message */
-#servermessage {
+#serverMessage {
   color: red;
   font-weight: bold;
+  list-style: none;
 }
 .animate-show,
 .animate-hide {

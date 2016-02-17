@@ -25,7 +25,9 @@
 		</div>
 	</div>
 
-    <div  id="servermessage" ng-hide="isServerMsg" class="animate-show animate-hide">{{serverMessage}}</div>
+    <ul id="serverMessage" class="animate-show animate-hide">
+    	<li ng-repeat="serverMessage in serverMessages">{{serverMessage}}</li>
+    </ul>
     <ul>
         <li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-<span style="color:skyblue;">{{message.nick}}</span>] {{message.message}}</li>
     </ul>
