@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notification"]);
+angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notification", "hSweetAlert"]);
 angular.module("angularChat").config(["$routeProvider", function($routeProvider) {
     $routeProvider.when("/", {
             templateUrl: "login/login.html",

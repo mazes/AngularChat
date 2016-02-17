@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("RoomListController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket",
-function listUsers($scope, $routeParams, $http, $location, ChatResource, socket){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket", "sweet", "Notification",
+function listUsers($scope, $routeParams, $http, $location, ChatResource, socket, sweet, Notification){
 	$scope.currentUser = ChatResource.getUser();
 	$scope.currentPassword = "";
 	$scope.userList = function userList(){
@@ -34,21 +34,48 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 			}
 		}
 		if(roomobj.locked){
-			$scope.currentPassword = prompt("Enter password : ", "");
+			sweet.show({
+				title: 'This room is password protected',
+				text: 'Please enter the password',
+				type: 'input',
+				showCancelButton: true,
+				closeOnConfirm: true,
+				animation: 'slide-from-top',
+				inputPlaceholder: 'Write something'
+			}, function(inputValue){
+				if (inputValue === false){
+					return false;
+				}
+
+				if (inputValue === '') {
+					sweet.showInputError('You need to write something!');
+					return false;
+				}
+				$scope.currentPassword = inputValue;
+				$scope.checkIfValid(inputValue, theRoom);
+			});
 		}
+	};
+
+	$scope.checkIfValid = function checkIfValid(passwd, theRoom){
 		var room = {
 			room: theRoom,
-			pass: $scope.currentPassword
+			pass: passwd
 		};
 		ChatResource.joinRoom(room, function(success, reason){
 			if(!success){
 				//prompt the reason why user wasn't able to join
-				console.log(reason);
+				Notification.error({
+					title: 'Could not enter room',
+					message: 'Reason: ' + reason,
+					positionY: 'top',
+					positionX: 'right'
+				});
 			}else{
 				$location.url('/chat/' + theRoom);
 			}
 		});
-	};
+	}
 
 	$scope.sendPrivate = function sendPrivate(user){
 		$location.url('/chat/private/' + user);
