@@ -47,6 +47,10 @@ function ChatResource(socket){
 			socket.emit("ban", action, callback);
 		},
 
+		unBanUser: function unBanUser(action, callback){
+			socket.emit("unban", action, callback);
+		},
+		
 		giveOP: function giveOP(action, callback){
 			socket.emit("op", action, callback);
 		},

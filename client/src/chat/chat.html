@@ -18,7 +18,7 @@
 			</div>
 			<div ng-show="setPassword">
     			<form name="setPass" ng-submit="editPassword()">
-    				<input type="text" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
+    				<input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
     			</form>
 			</div>
 		</div>
@@ -39,6 +39,8 @@
           class="list-group-item customHeadingNoMargin">+{{op}}</li>
 		<li ng-repeat="user in users" ng-click="operations(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
+  		<li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
+          class="list-group-item customHeadingNoMargin">ban-{{banned}}</li>
 	</ul>
 </div>
 
