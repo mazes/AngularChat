@@ -26,8 +26,7 @@ body {
     font-weight: bolder;
     font-variant: small-caps;
     font-style: oblique;
-    margin-top: 8px;
-    margin-bottom: -2px;
+    margin-top: 20px;
 }
 
 .customHeadingNoMargin {
@@ -128,6 +127,14 @@ body {
     margin-left: 15px;
 }
 
+/* Create Room */
+
+.form-horizontal {
+    width: 60%;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
  /* Server message */
 #servermessage {
