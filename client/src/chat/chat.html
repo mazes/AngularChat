@@ -4,7 +4,10 @@
 <div ng-init="init()" class="messageField">
 
     <div id="roomTopic">
- 		{{topic}}<button type="button" ng-if="isOp" ng-click="topicTrue()">editTopic</button>
+ 		{{topic}}
+ 		<div ng-if="isOp">
+ 			<button type="button" ng-click="topicTrue()">Edit Topic</button><button type="button" ng-click="setPassword()">Set Password</button>
+ 		</div>
     </div>
     <div ng-show="setTopic">
     	<form name="addTopic" ng-submit="editTopic()">
