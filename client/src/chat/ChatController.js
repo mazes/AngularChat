@@ -2,8 +2,8 @@
 
 angular.module("angularChat").controller("ChatController",
 
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "ngToast",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, ngToast){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification",
+	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, Notification){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -44,10 +44,14 @@ angular.module("angularChat").controller("ChatController",
 
 		socket.on("recv_privatemsg", function(user, message){
 			ChatResource.addpMessage(message, user, $scope.currentUser);
-			var message = ChatResource.getNewestPmessage();
-			if(message.receiver === $scope.currentUser){
-        		ngToast.create('You received a private message from: ' + message.sender);
-        		//$location.url('/chat/private/' + message.sender);
+			$scope.newmessage = ChatResource.getNewestPmessage();
+			if($scope.newmessage.receiver === $scope.currentUser){
+				Notification.primary({
+					message: "You've received a private message from " + $scope.newmessage.sender,
+					templateUrl: "chat/notify.html",
+					scope: $scope,
+					delay: 7000
+				});
 			}
 		});
 
@@ -172,6 +176,10 @@ angular.module("angularChat").controller("ChatController",
 					$scope.sendServerMessage(message);
 			}
 			$scope.actionBar = true;
+		};
+
+		$scope.gotoPm = function gotoPm(message){
+			$location.url('/chat/private/' + message.sender);
 		};
 
 		$scope.sendServerMessage = function sendServerMessage(message){
