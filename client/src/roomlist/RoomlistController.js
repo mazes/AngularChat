@@ -4,7 +4,7 @@ angular.module("angularChat").controller("RoomListController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket",
 function listUsers($scope, $routeParams, $http, $location, ChatResource, socket){
 	$scope.currentUser = ChatResource.getUser();
-	
+	$scope.currentPassword = "";
 	$scope.userList = function userList(){
 		ChatResource.getUsers();
 		socket.on("userlist", function(data){
@@ -33,12 +33,16 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 				return;
 			}
 		}
+		if(roomobj.locked){
+			$scope.currentPassword = prompt("Enter password : ", "");
+		}
 		var room = {
 			room: theRoom,
-			pass: undefined
+			pass: $scope.currentPassword
 		};
 		ChatResource.joinRoom(room, function(success, reason){
 			if(!success){
+				//prompt the reason why user wasn't able to join
 				console.log(reason);
 			}else{
 				$location.url('/chat/' + theRoom);

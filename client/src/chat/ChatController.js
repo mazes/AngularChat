@@ -2,8 +2,8 @@
 
 angular.module("angularChat").controller("ChatController",
 
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "ngToast",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, ngToast){
+["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification",
+	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, Notification){
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -45,10 +45,14 @@ angular.module("angularChat").controller("ChatController",
 
 		socket.on("recv_privatemsg", function(user, message){
 			ChatResource.addpMessage(message, user, $scope.currentUser);
-			var message = ChatResource.getNewestPmessage();
-			if(message.receiver === $scope.currentUser){
-        		ngToast.create('You received a private message from: ' + message.sender);
-        		//$location.url('/chat/private/' + message.sender);
+			$scope.newmessage = ChatResource.getNewestPmessage();
+			if($scope.newmessage.receiver === $scope.currentUser){
+				Notification.primary({
+					message: "You've received a private message from " + $scope.newmessage.sender,
+					templateUrl: "chat/notify.html",
+					scope: $scope,
+					delay: 7000
+				});
 			}
 		});
 
@@ -59,7 +63,7 @@ angular.module("angularChat").controller("ChatController",
 		socket.on("updateusers", function(data, users, ops){
 			$scope.users = users;
 			$scope.ops = ops;
-			for (var op in $scope.ops){;
+			for (var op in $scope.ops){
 				if($scope.currentUser === op){
 					$scope.isOp = true;
 				}
@@ -136,22 +140,20 @@ angular.module("angularChat").controller("ChatController",
 			$scope.userAction.user = user;
 			ChatResource.unBanUser($scope.userAction, function(success){
 				if(success){
-					var message = "You un-banned user from room!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("You un-banned user from room!");
 					ChatResource.getRoomList();
-					var message = {
+					var pMessage = {
 						nick: user,
 						message: "I have un-banned you from room: " + $routeParams.room 
 					};
-					ChatResource.sendPrivateMessage(message, function(success){
+					ChatResource.sendPrivateMessage(pMessage, function(success){
 						if(success){
 							$scope.sendServerMessage("You have notified user that he is free to join the room");
 						}
 					});
 
 				}else{
-					var message = "You need op rights for this operation!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("You need op rights for this operation!");
 				}
 			});
 		};
@@ -164,40 +166,39 @@ angular.module("angularChat").controller("ChatController",
 				case "Kick":
 					ChatResource.kickUser($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "Ban":
 					ChatResource.banUser($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "Op":
 					ChatResource.giveOP($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				case "DeOp":
 					ChatResource.deOP($scope.userAction, function(success){
 						if(!success){
-							var message = "You need op rights for this operation!";
-							$scope.sendServerMessage(message);
+							$scope.sendServerMessage("You need op rights for this operation!");
 						}
 					});
 					break;
 				default:
-					var message = "For some reason request failed!";
-					$scope.sendServerMessage(message);
+					$scope.sendServerMessage("For some reason request failed!");
 			}
 			$scope.actionBar = true;
+		};
+
+		$scope.gotoPm = function gotoPm(message){
+			$location.url('/chat/private/' + message.sender);
 		};
 
 		$scope.sendServerMessage = function sendServerMessage(message){
@@ -206,6 +207,14 @@ angular.module("angularChat").controller("ChatController",
 			$timeout(function(){
            		$scope.isServerMsg = true;
        		}, 5000);
+		};
+
+		$scope.topicTrue = function topicTrue(){
+			$scope.setTopic = true;
+		};
+
+		$scope.passwordTrue = function passwordTrue(){
+			$scope.setPassword = true;
 		};
 
 		$scope.editTopic = function editTopic(){
@@ -220,16 +229,9 @@ angular.module("angularChat").controller("ChatController",
 					console.log("failed to set topic");
 				}
 			});
+			$scope.newTopic = "";
 			$scope.addTopic.$setPristine();
 			$scope.setTopic = false;
-		};
-
-		$scope.topicTrue = function topicTrue(){
-			$scope.setTopic = true;
-		};
-
-		$scope.passwordTrue = function passwordTrue(){
-			$scope.setPassword = true;
 		};
 
 		$scope.editPassword = function editPassword(){
@@ -255,6 +257,7 @@ angular.module("angularChat").controller("ChatController",
 					}
 				}
 			});
+			$scope.newPassword = "";
 			$scope.setPass.$setPristine();
 			$scope.setPassword = false;
 		};
@@ -274,7 +277,7 @@ angular.module("angularChat").controller("ChatController",
 								if(success){
 									$scope.sendServerMessage("You have sent the new password to other ops!");
 								}
-							})
+							});
 						}
 					}
 				}
