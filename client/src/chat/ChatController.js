@@ -29,7 +29,6 @@ angular.module("angularChat").controller("ChatController",
 		};
 
 		$scope.init = function init(){
-			console.log("init");
 			ChatResource.getRoomList();
 			socket.on("roomlist", function(data){
 				for (var key in data) {
@@ -59,8 +58,8 @@ angular.module("angularChat").controller("ChatController",
 		socket.on("updateusers", function(data, users, ops){
 			$scope.users = users;
 			$scope.ops = ops;
-			for (var op in $scope.ops){
-				console.log("user is op");
+			console.log($scope.ops);
+			for (var op in $scope.ops){;
 				if($scope.currentUser === op){
 					$scope.isOp = true;
 				}
@@ -111,6 +110,7 @@ angular.module("angularChat").controller("ChatController",
 			var message = currentUser + " stripped  " + user + " op rights!";
 			$scope.sendServerMessage(message);
 		});
+
 
 		$scope.leaveChat = function leaveChat(){
 			ChatResource.leaveChat($scope.roomName);
@@ -187,7 +187,6 @@ angular.module("angularChat").controller("ChatController",
 				room: $routeParams.room,
 				topic: $scope.newTopic
 			};
-			$scope.newTopic = "";
 			ChatResource.setTopic(top, function(success){
 				if(success){
 					console.log("topic set");
@@ -195,13 +194,65 @@ angular.module("angularChat").controller("ChatController",
 					console.log("failed to set topic");
 				}
 			});
-			console.log($scope.addTopic);
 			$scope.addTopic.$setPristine();
 			$scope.setTopic = false;
 		};
 
 		$scope.topicTrue = function topicTrue(){
 			$scope.setTopic = true;
+		};
+
+		$scope.passwordTrue = function passwordTrue(){
+			$scope.setPassword = true;
+		};
+
+		$scope.editPassword = function editPassword(){
+			var pass = {
+				room: $routeParams.room,
+				pass: $scope.newPassword
+			};
+			ChatResource.setPassword(pass, function(success){
+				if(success){
+					for (var op in $scope.ops){
+						if(op !== $scope.currentUser){
+							var message = {
+								nick: op,
+								message: "I changed the password in " + 
+								$routeParams.room + " to: " + $scope.newPassword
+							};
+							ChatResource.sendPrivateMessage(message, function(success){
+								if(success){
+									$scope.sendServerMessage("You have sent the new password to other ops!");
+								}
+							})
+						}
+					}
+				}
+			});
+			$scope.setPass.$setPristine();
+			$scope.setPassword = false;
+		};
+
+		$scope.removePassword = function removePassword(){
+			var room = { room: $routeParams.room };
+			ChatResource.removePassword(room, function(success){
+				if(success){
+					for (var op in $scope.ops){
+						if(op !== $scope.currentUser){
+							var message = {
+								nick: op,
+								message: "I removed the password in " + 
+								$routeParams.room
+							};
+							ChatResource.sendPrivateMessage(message, function(success){
+								if(success){
+									$scope.sendServerMessage("You have sent the new password to other ops!");
+								}
+							})
+						}
+					}
+				}
+			});
 		};
 
 		$scope.$on("$destroy", function(){

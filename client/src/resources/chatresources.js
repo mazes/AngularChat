@@ -56,8 +56,15 @@ function ChatResource(socket){
 		},
 
 		disconnect: function disconnect(){
-			console.log("chatresource socket disconnect");
 			socket.disconnect();
+		},
+
+		setPassword: function setPassword(pass, callback){
+			socket.emit("setpassword", pass, callback);
+		},
+
+		removePassword: function removePassword(room, callback){
+			socket.emit("removepassword", room, callback);
 		},
 
         getUser: function getUser(){
