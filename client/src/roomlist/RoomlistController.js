@@ -47,6 +47,18 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket,
 				$scope.currentPassword = inputValue;
 				$scope.checkIfValid(inputValue, theRoom);
 			});
+		}else{
+			var room = {
+				room: theRoom,
+				pass: undefined
+			};
+			ChatResource.joinRoom(room, function(success, reason){
+				if(!success){
+					console.log(reason);
+				}else{
+					$location.url('/chat/' + theRoom);
+				}
+			});
 		}
 	};
 
@@ -57,7 +69,6 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket,
 		};
 		ChatResource.joinRoom(room, function(success, reason){
 			if(!success){
-				//prompt the reason why user wasn't able to join
 				Notification.error({
 					title: 'Could not enter room',
 					message: 'Reason: ' + reason,
