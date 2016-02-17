@@ -39,6 +39,8 @@
           class="list-group-item customHeadingNoMargin">+{{op}}</li>
 		<li ng-repeat="user in users" ng-click="operations(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
+  		<li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
+          class="list-group-item customHeadingNoMargin">ban-{{banned}}</li>
 	</ul>
 </div>
 

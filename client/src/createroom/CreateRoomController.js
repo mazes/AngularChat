@@ -22,13 +22,7 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 					room: $scope.name,
 					topic: $scope.topic
 				};
-				ChatResource.setTopic(topic, function(success){
-					if(success){
-						console.log("topic set");
-					}else{
-						console.log("failed to set topic");
-					}
-				});
+				ChatResource.setTopic(topic, function(success){});
 			}
 		});
 	};
