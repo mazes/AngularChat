@@ -4,7 +4,12 @@
 <div ng-init="init()" class="messageField">
 
     <div id="roomTopic">
- 		{{currentRoom.topic}}
+ 		{{topic}}<button type="button" ng-if="isOp" ng-click="topicTrue()">editTopic</button>
+    </div>
+    <div ng-show="setTopic">
+    	<form name="addTopic" ng-submit="editTopic()">
+    		<input type="text" ng-model="newTopic" placeholder="write input" ng-keyup="$event.keyCode == 13 && editTopic()"/>
+   		</form>
     </div>
     <div  id="servermessage" ng-hide="isServerMsg" class="animate-show animate-hide">{{serverMessage}}</div>
     <ul class="list-group">

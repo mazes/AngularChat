@@ -28,6 +28,9 @@ angular.module("angularChat").factory('socket', function ($rootScope) {
           }      
         });
       });
+    },
+    disconnect: function (){
+      socket.disconnect();
     }
   };
 });

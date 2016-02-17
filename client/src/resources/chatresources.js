@@ -55,6 +55,11 @@ function ChatResource(socket){
 			socket.emit("deop", action, callback);
 		},
 
+		disconnect: function disconnect(){
+			console.log("chatresource socket disconnect");
+			socket.disconnect();
+		},
+
         getUser: function getUser(){
         	return currentUser;
         },
@@ -62,7 +67,7 @@ function ChatResource(socket){
         setUser: function setUser(user){
         	currentUser = user;
         },
-        
+
         addpMessage: function addpMessage(message, sender, receiver){
         	var date = new Date();
 			var pmsg = {

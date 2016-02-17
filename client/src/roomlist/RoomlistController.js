@@ -21,6 +21,12 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 	};
 
 	$scope.joinRoom = function joinRoom(theRoom, roomobj){
+		for (var user in roomobj.users){
+			if(user === $scope.currentUser){
+				$location.url('/chat/' + theRoom);
+				return;
+			}
+		}
 		var room = {
 			room: theRoom,
 			pass: undefined
@@ -29,11 +35,6 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 			if(!success){
 				console.log(reason);
 			}else{
-				var messageObj = {
-					roomName: theRoom,
-					msg: $scope.currentUser + " has joined the room!"
-				};
-				ChatResource.sendMessage(messageObj);
 				$location.url('/chat/' + theRoom);
 			}
 		});

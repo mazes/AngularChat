@@ -13,11 +13,18 @@ angular.module("angularChat").controller("ChatController",
 			user: undefined,
 			operator: $scope.currentUser
 		};
-
+		$scope.isOp = false;
+		$scope.setTopic = false;
 		$scope.getMessages = function getMessages(){
 			$scope.chat = $scope.currentRoom.messageHistory;
 			$scope.users = $scope.currentRoom.users;
 			$scope.ops = $scope.currentRoom.ops;
+			$scope.topic = $scope.currentRoom.topic;
+			for (var op in $scope.ops){
+				if($scope.currentUser === op){
+					$scope.isOp = true;
+				}
+			}
 		};
 
 		$scope.init = function init(){
@@ -46,6 +53,18 @@ angular.module("angularChat").controller("ChatController",
 		socket.on("updateusers", function(data, users, ops){
 			$scope.users = users;
 			$scope.ops = ops;
+			for (var op in $scope.ops){
+				console.log("user is op");
+				if($scope.currentUser === op){
+					$scope.isOp = true;
+				}
+			}
+		});
+
+		socket.on("updatetopic", function(room, topic, currentUser){
+			var message = currentUser + " set new topic for the room!";
+			$scope.topic = topic;
+			$scope.sendServerMessage(message);
 		});
 
 		socket.on("servermessage", function(action, room, user){
@@ -112,7 +131,7 @@ angular.module("angularChat").controller("ChatController",
 					break;
 				case "Kick":
 					ChatResource.kickUser($scope.userAction, function(success){
-						if(success){
+						if(!success){
 							var message = "You need op rights for this operation!";
 							$scope.sendServerMessage(message);
 						}
@@ -120,7 +139,7 @@ angular.module("angularChat").controller("ChatController",
 					break;
 				case "Ban":
 					ChatResource.banUser($scope.userAction, function(success){
-						if(success){
+						if(!success){
 							var message = "You need op rights for this operation!";
 							$scope.sendServerMessage(message);
 						}
@@ -155,6 +174,28 @@ angular.module("angularChat").controller("ChatController",
 			$timeout(function(){
            		$scope.isServerMsg = true;
        		}, 5000);
+		};
+
+		$scope.editTopic = function editTopic(){
+			var top = {
+				room: $routeParams.room,
+				topic: $scope.newTopic
+			};
+			$scope.newTopic = "";
+			ChatResource.setTopic(top, function(success){
+				if(success){
+					console.log("topic set");
+				}else{
+					console.log("failed to set topic");
+				}
+			});
+			console.log($scope.addTopic);
+			$scope.addTopic.$setPristine();
+			$scope.setTopic = false;
+		};
+
+		$scope.topicTrue = function topicTrue(){
+			$scope.setTopic = true;
 		};
 
 		$scope.$on("$destroy", function(){
