@@ -42,6 +42,7 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket)
 		};
 		ChatResource.joinRoom(room, function(success, reason){
 			if(!success){
+				//prompt the reason why user wasn't able to join
 				console.log(reason);
 			}else{
 				$location.url('/chat/' + theRoom);
