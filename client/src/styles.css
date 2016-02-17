@@ -46,7 +46,7 @@ body {
     padding: 10px 40px 30px 35px;
     width: 70%;
     min-width: 800px;
-    overflow: auto;
+    min-height: 700px;
     margin:auto;
     position: relative;
 }
@@ -60,13 +60,14 @@ body {
 
 .messageField {
     width: 66%;
-    margin-top: -7px;
-    padding-right: 10px;
+    padding-right: 2%;
     word-wrap: break-word;
     overflow: auto;
-    height: 68%;
     position: absolute;
+    bottom: 118px;
+    max-height: 65%;
 }
+
 
 #roomTopic {
     border-bottom: solid lightgray 1px;
@@ -87,6 +88,23 @@ body {
     height: 50px;
     margin-left: 5%;
     border-top: solid lightgray 1px;
+}
+
+.loginInput {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+.logInText {
+    position: absolute;
+    left:10%;
+}
+
+.logBtnAlign {
+    position: absolute;
+    left: 81%;
 }
 
 .navFooter {
@@ -110,6 +128,8 @@ body {
     margin-left: 15px;
 }
 
+
+ /* Server message */
 #servermessage {
   color: red;
   font-weight: bold;
@@ -133,4 +153,45 @@ body {
 .animate-show.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
   display: block !important;
+}
+
+/* Login img */
+
+.loginImg {
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.opacity img {
+    opacity: 0.3;
+    filter: invert(1);
+    -webkit-filter: invert(1);
+    -moz-filter: invert(1);
+    -o-filter: invert(1);
+    -ms-filter: invert(1);
+}
+
+.opacity img:hover {
+    opacity: 1;
+    filter: invert(0);
+    -webkit-filter: invert(0);
+    -moz-filter: invert(0);
+    -o-filter: invert(0);
+    -ms-filter: invert(0);
+}
+
+img{
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+img:hover{
+	-webkit-transform: scale(1.1);
+  	-moz-transform: scale(1.1);
+  	-o-transform: scale(1.1);
+  	transform: scale(1.1);
 }

@@ -1,27 +1,28 @@
 <ng-include src="'header.html'"></ng-include>
 <ng-include src="'footer.html'"></ng-include>
 <h1 class="customHeading">{{currentUser}} is chatting in room {{roomName}}</h1>
+<div id="roomTopic">
+        {{topic}}
+    <div ng-if="isOp">
+        <button type="button" ng-click="topicTrue()">Edit Topic</button><button type="button" ng-click="setPassword()">Set Password</button>
+    </div>
+</div>
+
 <div ng-init="init()" class="messageField">
 
-    <div id="roomTopic">
- 		{{topic}}
- 		<div ng-if="isOp">
- 			<button type="button" ng-click="topicTrue()">Edit Topic</button><button type="button" ng-click="setPassword()">Set Password</button>
- 		</div>
-    </div>
     <div ng-show="setTopic">
     	<form name="addTopic" ng-submit="editTopic()">
     		<input type="text" ng-model="newTopic" placeholder="write input" ng-keyup="$event.keyCode == 13 && editTopic()"/>
    		</form>
     </div>
     <div  id="servermessage" ng-hide="isServerMsg" class="animate-show animate-hide">{{serverMessage}}</div>
-    <ul class="list-group">
+    <ul>
         <li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-<span style="color:skyblue;">{{message.nick}}</span>] {{message.message}}</li>
     </ul>
 
 </div>
 <div id="usersInRoom">
-	<span class="customHeadingNoMargin" style="font-size:120%">users in room</span>
+	<span class="customHeadingNoMargin" style="font-size:120%">Users in Room</span>
 	<div ng-hide="actionBar">
     	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
 	</div>
@@ -39,4 +40,3 @@
     <button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
 </div>
 <toast></toast>
-

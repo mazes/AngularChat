@@ -1,7 +1,12 @@
+<ng-include src="'footer.html'"></ng-include>
 <div>
+    <section class="opacity">
+        <img src="../img/IEMeme.jpg" class="loginImg" alt="If you use IE you're gonna have a bad time" />
+    </section>
     <h1 class="customHeading">Select a nickname</h1>
-		<input type="text" class="form-control" style="width:80%; display: inline;" ng-model="currentUser" required/>
-            <button class="btn btn-primary" ng-click="onLogin()">Login</button> <br>
-            The username : {{currentUser}}
-	<div>{{errorMessage}}</div>
+    <div class="loginInput">
+        <input type="text" class="form-control logInText" style="width:70%; display: inline;" ng-model="currentUser" required/>
+        <button class="btn btn-primary logBtnAlign" ng-click="onLogin()">Login</button> <br>
+        <div>{{errorMessage}}</div>
+    </div>
 </div>
