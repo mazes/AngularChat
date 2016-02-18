@@ -21,6 +21,9 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
             }).when("/login/:disconnect", {
                 templateUrl: "login/login.html",
                 controller: "LoginController"
+            }).when("/unreadpms/", {
+                templateUrl: "inbox/inbox.html",
+                controller: "InboxController"
             }).otherwise("/", {
                 templateUrl: "login/login.html",
                 controller: "LoginController"

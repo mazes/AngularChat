@@ -3,6 +3,7 @@
 angular.module("angularChat").controller("RoomListController",
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket", "sweet", "Notification",
 function listUsers($scope, $routeParams, $http, $location, ChatResource, socket, sweet, Notification){
+	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 	$scope.currentUser = ChatResource.getUser();
 	$scope.currentPassword = "";
 	$scope.userList = function userList(){

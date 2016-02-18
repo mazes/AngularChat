@@ -4,6 +4,7 @@ angular.module("angularChat").controller("ChatController",
 
 ["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification",
 	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, Notification){
+		$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
