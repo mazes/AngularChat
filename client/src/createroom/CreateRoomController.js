@@ -1,8 +1,11 @@
 "use strict";
 
 angular.module("angularChat").controller("CreateRoomController",
-["$scope","$routeParams", "$http", "$location", "ChatResource", "socket",
-function CreateRoomController($scope, $routeParams, $http, $location, ChatResource, socket){
+["$scope","$routeParams", "$location", "ChatResource", "socket", "loggedIn",
+function CreateRoomController($scope, $routeParams, $location, ChatResource, socket, loggedIn){
+	if(!loggedIn.logged){
+		$location.url('/');
+	}
 	$scope.currentUser = ChatResource.getUser();
 	$scope.pass = undefined;
 	$scope.createRoom = function createRoom(){

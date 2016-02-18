@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("LoginController",
-["$scope", "$http", "$location","ChatResource", "$routeParams",
-function login($scope, $http, $location, ChatResource, $routeParams){
+["$scope", "$location","ChatResource", "$routeParams", "loggedIn",
+function login($scope, $location, ChatResource, $routeParams, loggedIn){
 	if($routeParams.disconnect !== undefined){
 		ChatResource.disconnect();
 	}else{
@@ -19,6 +19,7 @@ function login($scope, $http, $location, ChatResource, $routeParams){
 			}
 			else{
 				ChatResource.setUser($scope.currentUser);
+				loggedIn.logged = true;
 				$location.url('/roomlist');
 			}
 		});

@@ -2,8 +2,11 @@
 
 angular.module("angularChat").controller("ChatController",
 
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification",
-	function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket, $timeout, Notification){
+["$scope", "$routeParams", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification", "loggedIn",
+	function ChatController($scope, $routeParams, $location, ChatResource, $route, socket, $timeout, Notification, loggedIn){
+		if(!loggedIn.logged){
+			$location.url('/');
+		}
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -225,13 +228,7 @@ angular.module("angularChat").controller("ChatController",
 				room: $routeParams.room,
 				topic: $scope.newTopic
 			};
-			ChatResource.setTopic(top, function(success){
-				if(success){
-					console.log("topic set");
-				}else{
-					console.log("failed to set topic");
-				}
-			});
+			ChatResource.setTopic(top, function(success){});
 			$scope.newTopic = "";
 			$scope.addTopic.$setPristine();
 			$scope.setTopic = false;
@@ -288,12 +285,6 @@ angular.module("angularChat").controller("ChatController",
 		};
 
 		$scope.$on("$destroy", function(){
-			socket.off("recv_privatemsg", function(success){
-				if(success){
-					console.log("destroy");
-				}else{
-					console.log("failed destroy");
-				}
-			});
+			socket.off("recv_privatemsg", function(success){});
 		});
 }]);
