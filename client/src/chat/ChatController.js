@@ -57,7 +57,9 @@ angular.module("angularChat").controller("ChatController",
 		});
 
 		socket.on("updatechat", function(data, messages){
-				ChatResource.getRoomList();
+				if(data === $routeParams.room){
+					$scope.chat = messages;
+				}
 		});
 
 		socket.on("updateusers", function(data, users, ops){
@@ -130,6 +132,7 @@ angular.module("angularChat").controller("ChatController",
 				msg: $scope.message
 			};
 			ChatResource.sendMessage(messageObj);
+			$scope.message = "";
 		};
 
 		$scope.operations = function operations(user){
@@ -204,7 +207,6 @@ angular.module("angularChat").controller("ChatController",
 
 		$scope.sendServerMessage = function sendServerMessage(message){
 			$scope.serverMessages.push(message);
-			//$scope.$apply();
 			$timeout(function(){
            		$scope.serverMessages.shift();
        		}, 5000);

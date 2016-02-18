@@ -26,6 +26,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 				$scope.chat = $scope.getMessages();
 			}
 		});
+		$scope.message = "";
 	};
 
 	$scope.getMessages = function getMessages(){
@@ -46,6 +47,17 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 
 	$scope.chatteeCurrUser = function chatteeCurrUser(usermessage){
 		return usermessage.sender === $routeParams.chattee &&  usermessage.receiver === $scope.currentUser;
+	};
+
+	$scope.goToChat = function goToChat(user){
+		$location.url('/chat/private/' + user);
+	};
+
+	$scope.getUsers = function getUsers(){
+		ChatResource.getUsers();
+		socket.on("userlist", function(data){
+			$scope.users = data;
+		});
 	};
 
 	$scope.$on("$destroy", function(){

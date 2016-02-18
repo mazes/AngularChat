@@ -7,17 +7,19 @@
     </ul>
 </div>
 
-<div id="usersInRoom">
+<div id="usersInRoom" ng-init="getUsers()">
 	<span class="customHeadingNoMargin" style="font-size:120%">Users Online</span>
     <ul>
-        <li ng-repeat="user in users" ng-click="operations(user)"
+        <li ng-repeat="user in users" ng-click="goToChat(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
     </ul>
 
 </div>
 
 <div class="inputField">
-    <input type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message">
-    <button class="btn btn-primary" type="button" id="sendPrivate" ng-click="sendPrivateMessage(chattee)">Send</button>
-    <button class="btn btn-primary" type="button" id="leavechat" ng-click="leavePrivate()">Leave</button>
+    <form name="pMessageForm">
+        <input type="text" class="form-control" style="display:inline; width:80%;" ng-model="message" ng-required="true" ng-keyup="$event.keyCode == 13 && pMessageForm.$valid && sendPrivateMessage(chattee)" autofocus/>
+        <button class="btn btn-primary" type="button" id="sendPrivate" ng-click="pMessageForm.$valid && sendPrivateMessage(chattee)">Send</button>
+        <button class="btn btn-primary" type="button" id="leavechat" ng-click="leavePrivate()">Leave</button>
+    </form>
 </div>

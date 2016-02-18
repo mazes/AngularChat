@@ -14,7 +14,8 @@ function login($scope, $http, $location, ChatResource, $routeParams){
 	$scope.onLogin = function onLogin(){
 		ChatResource.login($scope.currentUser, $scope.pass, function(success){
 			if(!success){
-				$scope.errorMessage = "Login failed!";
+				$scope.errorMessage = "Username is taken!";
+				$scope.inputForm.$setPristine();
 			}
 			else{
 				ChatResource.setUser($scope.currentUser);
