@@ -1,12 +1,12 @@
 "use strict";
 
 angular.module("angularChat").controller("ChatController",
-
 ["$scope", "$routeParams", "$location", "ChatResource", "$route", "socket", "$timeout", "Notification", "loggedIn",
 	function ChatController($scope, $routeParams, $location, ChatResource, $route, socket, $timeout, Notification, loggedIn){
 		if(!loggedIn.logged){
 			$location.url('/');
 		}
+		$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		$scope.roomName = $routeParams.room;
 		$scope.currentUser = ChatResource.getUser();
 		$scope.commands = ["Send Message", "Kick", "Ban", "Op", "DeOp"];
@@ -122,7 +122,6 @@ angular.module("angularChat").controller("ChatController",
 				$scope.sendServerMessage(currentUser + " stripped  " + user + " op rights!");
 			}
 		});
-
 
 		$scope.leaveChat = function leaveChat(){
 			ChatResource.leaveChat($scope.roomName);

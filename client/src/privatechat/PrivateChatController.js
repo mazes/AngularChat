@@ -29,15 +29,15 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
 				$scope.chat = $scope.getMessages();
 			}
 		});
-		$scope.message = "";
+		//$scope.message = "";
 	};
 
 	$scope.getMessages = function getMessages(){
 		var usermessages = ChatResource.getpMessages();
-		console.log(usermessages);
 		var messages = [];
 		for(var i = 0; i < usermessages.length; i++){
 			if($scope.currUserChattee(usermessages[i]) || $scope.chatteeCurrUser(usermessages[i])){
+				usermessages[i].read = true;
 				messages.push(usermessages[i]);
 			}
 		}

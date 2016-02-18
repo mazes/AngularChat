@@ -85,7 +85,8 @@ function ChatResource(socket){
 				receiver: receiver,
 				sender: sender,
 				message: message,
-				date: date
+				date: date,
+				read: false
 			};
         	pMessages.push(pmsg);
         },
@@ -96,6 +97,16 @@ function ChatResource(socket){
 
         getNewestPmessage: function getNewestPmessage(){
         	return pMessages[pMessages.length-1];
+        },
+
+        getNumberOfUnreadMessages: function getNumberOfUnreadMessages(){
+            var counter = 0;
+            for(var i = 0; i < pMessages.length; i++){
+                if(!pMessages[i].read){
+                    counter += 1;
+                }
+            }
+        	return counter;
         }
 	};
 }]);

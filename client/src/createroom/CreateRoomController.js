@@ -6,8 +6,23 @@ function CreateRoomController($scope, $routeParams, $location, ChatResource, soc
 	if(!loggedIn.logged){
 		$location.url('/');
 	}
+	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 	$scope.currentUser = ChatResource.getUser();
 	$scope.pass = undefined;
+
+	socket.on("recv_privatemsg", function(user, message){
+		ChatResource.addpMessage(message, user, $scope.currentUser);
+		$scope.newmessage = ChatResource.getNewestPmessage();
+		if($scope.newmessage.receiver === $scope.currentUser){
+			Notification.primary({
+				message: "You've received a private message from " + $scope.newmessage.sender,
+				templateUrl: "chat/notify.html",
+				scope: $scope,
+				delay: 7000
+			});
+		}
+	});
+
 	$scope.createRoom = function createRoom(){
 		$scope.currentUser = $routeParams.username;
 		$scope.room = {
@@ -29,4 +44,14 @@ function CreateRoomController($scope, $routeParams, $location, ChatResource, soc
 			}
 		});
 	};
+
+	$scope.$on("$destroy", function(){
+	socket.off("recv_privatemsg", function(success){
+		if(success){
+			console.log("destroy");
+		}else{
+			console.log("failed destroy");
+		}
+	});
+	});
 }]);

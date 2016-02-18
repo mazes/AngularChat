@@ -22,6 +22,9 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
             }).when("/chat/private/:chattee", {
                 templateUrl: "privatechat/privateChat.html",
                 controller: "PrivateChatController"
+            }).when("/unreadpms/", {
+                templateUrl: "inbox/inbox.html",
+                controller: "InboxController"
             }).otherwise("/", {
                 templateUrl: "login/login.html",
                 controller: "LoginController"
