@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 angular.module("angularChat").controller("InboxController",
 ["$scope","$routeParams", "$http", "$location", "ChatResource", "socket", "Notification",
@@ -23,7 +23,7 @@ function InboxController($scope, $routeParams, $http, $location, ChatResource, s
 
 	$scope.getUnread = function getUnread(){
 		var messages = ChatResource.getpMessages();
-		var unread = []
+		var unread = [];
 		for(var i = 0; i < messages.length; i++){
 			if(!messages[i].read){
 				unread.push(messages[i]);

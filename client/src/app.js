@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notification", "hSweetAlert"])
+angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notification", "hSweetAlert", "angular.filter"])
 
     .value('loggedIn', {
         logged: false

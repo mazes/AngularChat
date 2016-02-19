@@ -30,7 +30,6 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
 				$scope.chat = $scope.getMessages();
 			}
 		});
-		//$scope.message = "";
 	};
 
 	$scope.getMessages = function getMessages(){

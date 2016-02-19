@@ -2,7 +2,7 @@
 
 angular.module("angularChat").controller("CreateRoomController",
 ["$scope","$routeParams", "$location", "ChatResource", "socket", "loggedIn", "Notification",
-function CreateRoomController($scope, $routeParams, $location, ChatResource, socket, loggedIn, Notification){
+function CreateRoomController($scope, $routeParams, $location, ChatResource, socket, loggedIn, Notification	){
 	if(!loggedIn.logged){
 		$location.url('/');
 	}
