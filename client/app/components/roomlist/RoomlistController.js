@@ -26,7 +26,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
         if($scope.newmessage.receiver === $scope.currentUser){
             Notification.primary({
                 message: "You've received a private message from " + $scope.newmessage.sender,
-                templateUrl: "chat/notify.html",
+                templateUrl: "app/components/chat/notify.html",
                 scope: $scope,
                 delay: 7000
             });

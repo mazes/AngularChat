@@ -17,7 +17,7 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
         if($scope.newmessage.sender != $scope.chattee){
             Notification.primary({
                 message: "You've received a private message from " + $scope.newmessage.sender,
-                templateUrl: "chat/notify.html",
+                templateUrl: "app/components/chat/notify.html",
                 scope: $scope,
                 delay: 7000
             });

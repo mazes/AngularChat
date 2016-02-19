@@ -3,17 +3,8 @@
 <h1 class="customHeading">{{currentUser}} is chatting with {{chattee}}</h1>
 <div class="messageField">
     <ul>
-    	<li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
+        <li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
     </ul>
-</div>
-
-<div id="usersInRoom" ng-init="getUsers()">
-	<span class="customHeadingNoMargin" style="font-size:120%">Users Online</span>
-    <ul>
-        <li ng-repeat="user in users" ng-click="goToChat(user)"
-          class="list-group-item customHeadingNoMargin">{{user}}</li>
-    </ul>
-
 </div>
 
 <div class="inputField">
