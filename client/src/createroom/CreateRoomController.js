@@ -46,6 +46,10 @@ function CreateRoomController($scope, $routeParams, $location, ChatResource, soc
 		});
 	};
 
+	$scope.gotoPm = function gotoPm(sender){
+		$location.url('/chat/private/' + sender);
+	};
+
 	$scope.$on("$destroy", function(){
 		socket.off("recv_privatemsg", function(success){});
 	});

@@ -17,7 +17,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
 	};
 
 	socket.on("roomlist", function(data){
-			$scope.rooms = data;
+		$scope.rooms = data;
 	});	
 
 	socket.on("recv_privatemsg", function(user, message){
@@ -74,6 +74,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
 				if(!success){
 					console.log(reason);
 				}else{
+					ChatResource.setCurrentRoom(theRoom);
 					$location.url('/chat/' + theRoom);
 				}
 			});
@@ -97,6 +98,10 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
 				$location.url('/chat/' + theRoom);
 			}
 		});
+	};
+
+	$scope.gotoPm = function gotoPm(sender){
+		$location.url('/chat/private/' + sender);
 	};
 
 	$scope.sendPrivate = function sendPrivate(user){

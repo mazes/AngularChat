@@ -204,8 +204,8 @@ angular.module("angularChat").controller("ChatController",
 			$scope.actionBar = true;
 		};
 
-		$scope.gotoPm = function gotoPm(message){
-			$location.url('/chat/private/' + message.sender);
+		$scope.gotoPm = function gotoPm(sender){
+			$location.url('/chat/private/' + sender);
 		};
 
 		$scope.sendServerMessage = function sendServerMessage(message){
