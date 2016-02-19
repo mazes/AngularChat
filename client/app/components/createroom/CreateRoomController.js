@@ -36,6 +36,7 @@ function CreateRoomController($scope, $routeParams, $location, ChatResource, soc
             if(!success){
                 console.log(reason);
             }else{
+                ChatResource.setCurrentRoom($scope.name);
                 $location.url('/chat/' + $scope.name);
                 var topic = {
                     room: $scope.name,

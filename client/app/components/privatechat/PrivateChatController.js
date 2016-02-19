@@ -74,6 +74,7 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
 
     $scope.leavePrivate = function leavePrivate(){
         var currentRoom = ChatResource.getCurrentRoom();
+        console.log(currentRoom);
         if(currentRoom === ""){
             $location.url('/roomlist');
         }else{
