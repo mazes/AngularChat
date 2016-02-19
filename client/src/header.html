@@ -1,0 +1,21 @@
+<nav class="navbar navbar-default" id="navHeader">
+  <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed navbar-left" data-toggle="collapse" data-target="#headerLinks" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand customHeadingNoMargin">[{{currentUser}}]  </span>
+    </div>
+    <div id="headerLinks" class="navbar-collapse collapse navbar-left">
+        <ul class="nav navbar-nav">
+          <li><a ng-href="#/roomlist" class="customHeadingNoMargin">Roomlist</a></li>
+          <li><a ng-href="#/createroom" class="customHeadingNoMargin">Create room</a></li>
+          <li><a ng-if="unReadMessages != 0" ng-href="#/unreadpms" class="customHeadingNoMargin">You've got {{unReadMessages}} unread messages!</a></li>
+          <li><a ng-href="#/" class="customHeadingNoMargin">Log Out</a></li>
+        </ul>
+    </div>
+  </div>
+</nav>

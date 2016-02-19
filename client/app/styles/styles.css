@@ -220,3 +220,18 @@ img:hover{
   	-o-transform: scale(1.1);
   	transform: scale(1.1);
 }
+
+.list-group-item-inbox {
+    list-style: none;
+    height: 30px;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 110%;
+}
+
+.list-group-item-inbox li:before {
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\2709";
+    font-family: 'Glyphicons Halflings';
+    margin-left: -17px;
+}

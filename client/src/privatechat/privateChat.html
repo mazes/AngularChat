@@ -1,0 +1,16 @@
+<ng-include src="'header.html'"></ng-include>
+<ng-include src="'footer.html'"></ng-include>
+<h1 class="customHeading">{{currentUser}} is chatting with {{chattee}}</h1>
+<div class="messageField">
+    <ul>
+        <li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
+    </ul>
+</div>
+
+<div class="inputField">
+    <form name="pMessageForm">
+        <input type="text" class="form-control" style="display:inline; width:80%;" ng-model="message" ng-required="true" ng-keyup="$event.keyCode == 13 && pMessageForm.$valid && sendPrivateMessage(chattee)" autofocus/>
+        <button class="btn btn-primary" type="button" id="sendPrivate" ng-click="pMessageForm.$valid && sendPrivateMessage(chattee)">Send</button>
+        <button class="btn btn-primary" type="button" id="leavechat" ng-click="leavePrivate()">Leave</button>
+    </form>
+</div>
