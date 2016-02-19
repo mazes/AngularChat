@@ -246,7 +246,7 @@ angular.module("angularChat").controller("ChatController",
                             var message = {
                                 nick: op,
                                 message: "I changed the password in " + 
-                                $routeParams.room + " to: " + $scope.newPassword
+                                $routeParams.room + " to: " + pass.pass
                             };
                             ChatResource.sendPrivateMessage(message, function(success){
                                 if(success){
