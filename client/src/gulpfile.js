@@ -8,8 +8,8 @@ gulp.task('default', ['webserver']);
 
 gulp.task('jshint', function() {
     return gulp.src([
-	'**/*.js',
-	'!node_modules/**/*'
+    '**/*.js',
+    '!node_modules/**/*'
     ])
     .pipe(jshint())
     .pipe(jshint('.jshintrc'))

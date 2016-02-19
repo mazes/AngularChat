@@ -3,7 +3,7 @@
 <h1 class="customHeading">{{currentUser}} is chatting with {{chattee}}</h1>
 <div class="messageField">
     <ul>
-    	<li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
+        <li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
     </ul>
 </div>
 

@@ -5,28 +5,28 @@
 <div ng-init="init()" class="messageField">
 
     <div id="roomTopic">
- 		{{topic}}
- 		<div ng-if="isOp">
- 			<button type="button" ng-click="topicTrue()">Edit Topic</button>
- 			<button type="button" ng-click="passwordTrue()">Set Password</button>
- 			<button type="button" ng-click="removePassword()">Remove Password</button>
- 		</div>
- 		<div id="editinputs">
-    		<div ng-show="setTopic">
-    			<form name="addTopic" ng-submit="editTopic()">
-    				<input type="text" ng-model="newTopic" placeholder="new topic..." ng-keyup="$event.keyCode == 13 && editTopic()"/>
-    			</form>
-			</div>
-			<div ng-show="setPassword">
-    			<form name="setPass" ng-submit="editPassword()">
-    				<input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
-    			</form>
-			</div>
-		</div>
-	</div>
+        {{topic}}
+        <div ng-if="isOp">
+            <button type="button" ng-click="topicTrue()">Edit Topic</button>
+            <button type="button" ng-click="passwordTrue()">Set Password</button>
+            <button type="button" ng-click="removePassword()">Remove Password</button>
+        </div>
+        <div id="editinputs">
+            <div ng-show="setTopic">
+                <form name="addTopic" ng-submit="editTopic()">
+                    <input type="text" ng-model="newTopic" placeholder="new topic..." ng-keyup="$event.keyCode == 13 && editTopic()"/>
+                </form>
+            </div>
+            <div ng-show="setPassword">
+                <form name="setPass" ng-submit="editPassword()">
+                    <input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <ul id="serverMessage" class="animate-show animate-hide">
-    	<li ng-repeat="serverMessage in serverMessages track by $index">{{serverMessage}}</li>
+        <li ng-repeat="serverMessage in serverMessages track by $index">{{serverMessage}}</li>
     </ul>
     <ul>
         <li ng-repeat="message in chat track by $index" style="list-style:none;">[{{message.timestamp | date:'MM/dd/yyyy @ HH:mm'}}-<span style="color:skyblue;">{{message.nick}}</span>] {{message.message}}</li>
@@ -34,25 +34,25 @@
 
 </div>
 <div id="usersInRoom">
-	<span class="customHeadingNoMargin" style="font-size:120%">Users in Room</span>
-	<div ng-hide="actionBar">
-    	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
-	</div>
-	<ul class="list-group">
-		<li ng-repeat="op in ops" ng-click="operations(op)"
+    <span class="customHeadingNoMargin" style="font-size:120%">Users in Room</span>
+    <div ng-hide="actionBar">
+        <button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
+    </div>
+    <ul class="list-group">
+        <li ng-repeat="op in ops" ng-click="operations(op)"
           class="list-group-item customHeadingNoMargin">+{{op}}</li>
-		<li ng-repeat="user in users" ng-click="operations(user)"
+        <li ng-repeat="user in users" ng-click="operations(user)"
           class="list-group-item customHeadingNoMargin">{{user}}</li>
-  		<li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
+        <li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
           class="list-group-item customHeadingNoMargin">{{banned}}-banned</li>
-	</ul>
+    </ul>
 </div>
 
 <div class="inputField">
-	<form name="messageForm">
-    	<input name="messageInput" type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message" ng-required="true" ng-keyup="$event.keyCode == 13 && messageForm.$valid && sendMessage()" autofocus>
-    	<button class="btn btn-primary" type="button" id="sendmessage" ng-click="messageForm.$valid && sendMessage()">Send</button>
-    	<button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
+    <form name="messageForm">
+        <input name="messageInput" type="text" class="form-control" style="display:inline; width:80%;" placeholder="input message" ng-model="message" ng-required="true" ng-keyup="$event.keyCode == 13 && messageForm.$valid && sendMessage()" autofocus>
+        <button class="btn btn-primary" type="button" id="sendmessage" ng-click="messageForm.$valid && sendMessage()">Send</button>
+        <button class="btn btn-primary" type="button" id="leavechat" ng-click="leaveChat()">Leave</button>
     </form>
 </div>
 <toast></toast>

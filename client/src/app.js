@@ -11,8 +11,8 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
                 templateUrl: "login/login.html",
                 controller: "LoginController"
             }).when("/roomlist", {
-            	templateUrl: "roomlist/roomlist.html",
-            	controller: "RoomListController"
+                templateUrl: "roomlist/roomlist.html",
+                controller: "RoomListController"
             }).when("/createroom", {
                 templateUrl: "createroom/createroom.html",
                 controller: "CreateRoomController"
