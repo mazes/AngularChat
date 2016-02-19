@@ -1,9 +1,0 @@
-<ng-include src="'header.html'"></ng-include>
-<ng-include src="'footer.html'"></ng-include>
-<h1 class="customHeading">Inbox</h1>
-
-<div class="list-group-item-inbox">
-    <ul>
-        <li ng-repeat="(name, value) in messages | countBy: 'sender'" class="list-group-item-inbox" ng-click="gotoPm(name)"> You've got {{value}} unread messages from {{name}}</li>
-    </ul>
-</div>
