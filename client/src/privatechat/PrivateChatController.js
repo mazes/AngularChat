@@ -66,13 +66,7 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
 	};
 
 	$scope.$on("$destroy", function(){
-		socket.off("recv_privatemsg", function(success){
-			if(success){
-				console.log("destroy");
-			}else{
-				console.log("failed destroy");
-			}
-		});
+		socket.off("recv_privatemsg", function(success){});
 	});
 
 	$scope.chat = $scope.getMessages();

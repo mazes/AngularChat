@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("angularChat").controller("CreateRoomController",
-["$scope","$routeParams", "$location", "ChatResource", "socket", "loggedIn",
-function CreateRoomController($scope, $routeParams, $location, ChatResource, socket, loggedIn){
+["$scope","$routeParams", "$location", "ChatResource", "socket", "loggedIn", "Notification",
+function CreateRoomController($scope, $routeParams, $location, ChatResource, socket, loggedIn, Notification){
 	if(!loggedIn.logged){
 		$location.url('/');
 	}
@@ -47,12 +47,6 @@ function CreateRoomController($scope, $routeParams, $location, ChatResource, soc
 	};
 
 	$scope.$on("$destroy", function(){
-	socket.off("recv_privatemsg", function(success){
-		if(success){
-			console.log("destroy");
-		}else{
-			console.log("failed destroy");
-		}
-	});
+		socket.off("recv_privatemsg", function(success){});
 	});
 }]);

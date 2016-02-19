@@ -104,13 +104,6 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
 	};
 
 	$scope.$on("$destroy", function(){
-	socket.off("recv_privatemsg", function(success){
-		if(success){
-			console.log("destroy");
-		}else{
-			console.log("failed destroy");
-		}
+		socket.off("recv_privatemsg", function(success){});
 	});
-	});
-
 }]);
