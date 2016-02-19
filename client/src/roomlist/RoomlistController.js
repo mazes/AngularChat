@@ -27,6 +27,7 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket,
 				scope: $scope,
 				delay: 7000
 			});
+			$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		}
 	});
 

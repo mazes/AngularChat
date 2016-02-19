@@ -17,6 +17,7 @@ function CreateRoomController($scope, $routeParams, $http, $location, ChatResour
 				scope: $scope,
 				delay: 7000
 			});
+			$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		}
 	});
 

@@ -5,6 +5,7 @@ angular.module("angularChat").controller("PrivateChatController",
 function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
 	$scope.chattee = $routeParams.chattee;
 	$scope.currentUser = ChatResource.getUser();
+	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 
 	socket.on("recv_privatemsg", function(user, message){
 		console.log("Receiving message");
@@ -37,6 +38,7 @@ function ChatController($scope, $routeParams, $http, $location, ChatResource, $r
 				usermessages[i].read = true;
 				messages.push(usermessages[i]);
 			}
+			$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		}
 		return messages;
 	};

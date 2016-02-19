@@ -55,6 +55,7 @@ angular.module("angularChat").controller("ChatController",
 					delay: 7000
 				});
 			}
+			$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 		});
 
 		socket.on("updatechat", function(data, messages){
