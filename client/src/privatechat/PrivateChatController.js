@@ -64,6 +64,10 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
 		});
 	};
 
+	$scope.leavePrivate = function leavePrivate(){
+		
+	};
+
 	$scope.$on("$destroy", function(){
 		socket.off("recv_privatemsg", function(success){});
 	});

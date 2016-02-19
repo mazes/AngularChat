@@ -13,8 +13,8 @@
         <ul class="nav navbar-nav">
           <li><a ng-href="#/roomlist" class="customHeadingNoMargin">Roomlist</a></li>
           <li><a ng-href="#/createroom" class="customHeadingNoMargin">Create room</a></li>
+          <li><a ng-if="unReadMessages != 0" ng-href="#/unreadpms" class="customHeadingNoMargin">You've got {{unReadMessages}} unread messages!</a></li>
           <li><a ng-href="#/" class="customHeadingNoMargin">Log Out</a></li>
-          <li><a ng-if="unReadMessages != 0" ng-href="#/unreadpms" class="customHeadingNoMarginUnread">You've got {{unReadMessages}} unread messages!</a></li>
         </ul>
     </div>
   </div>
