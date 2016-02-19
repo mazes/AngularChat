@@ -1,0 +1,15 @@
+<ng-include src="'app/views/footer.html'"></ng-include>
+<div>
+    <section class="opacity">
+        <img src="app/img/IEMeme.jpg" class="loginImg" alt="If you use IE you're gonna have a bad time" />
+    </section>
+    <h1 class="customHeading">Select a nickname</h1>
+    <div class="loginInput">
+    	<form name="inputForm">
+       		<input name="inputName" type="text" ng-model="currentUser" class="form-control logInText" style="width:70%; display: inline;" ng-keyup="$event.keyCode == 13 && inputForm.$valid && onLogin()" ng-required="true" ng-maxlength="21" autofocus/>
+        <button class="btn btn-primary logBtnAlign" ng-click="inputForm.$valid && onLogin()">Login</button><br>
+    		<div ng-show="inputForm.inputName.$invalid && inputForm.inputName.$touched">Max length 21 characters!</div>
+        <div>{{errorMessage}}</div>
+    </form>
+    </div>
+</div>

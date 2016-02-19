@@ -1,0 +1,28 @@
+<ng-include src="'app/views/header.html'"></ng-include>
+<ng-include src="'app/views/footer.html'"></ng-include>
+    <h1 class="customHeading">Create a Chatroom</h1>
+<div class="daForm">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label customHeaderLabel">Name</label><br>
+            <input name="name" type="text" class="form-control" ng-model="name" id="name"
+                style="width:80%; display:inline;" placeholder="Enter name" ng-maxlength="50" autofocus>
+        </div>
+        <div class="form-group">
+            <label for="roomTopic" class="col-sm-2 control-label customHeaderLabel">Topic</label><br>
+            <input name="topic" type="text" class="form-control" ng-model="topic" id="roomTopic"
+                style="width:80%; display:inline;" placeholder="Leave blank for no topic">
+        </div>
+        <div class="form-group">
+            <label for="pass" class="col-sm-2 control-label customHeaderLabel">Password</label><br>
+            <input name="pass" type="text" class="form-control" ng-model="pass" id="roomPassword"
+                style="width:80%; display:inline;" placeholder="Leave blank for no password">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2">
+                <button type="button" class="btn btn-primary" id="createroom" ng-click="createRoom()">
+                    Create Room</button>
+            </div>
+        </div>
+    </form>
+</div>

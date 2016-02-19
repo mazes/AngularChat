@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="angularChat">
+    <head>
+        <base href="/">
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="app/styles/styles.css">
+        <link rel="stylesheet" href="../node_modules/angular-ui-notification/dist/angular-ui-notification.min.css">
+        <link rel="stylesheet" href="../node_modules/sweetalert/dist/sweetalert.css">
+        <title>CIA - Chat In App</title>
+    </head>
+    <body>
+        <!--<script src="/dist/js/main.js"></script>-->
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../node_modules/angular/angular.js"></script>
+        <script src="../node_modules/angular-route/angular-route.js"></script>
+        <script src="../node_modules/angular-animate/angular-animate.js"></script>
+        <script src="../node_modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+        <script src="../node_modules/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+        <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../node_modules/angular-h-sweetalert/src/ngSweetAlert.js"></script>
+        
+        <script src="app/app.js"></script>
+        <script src="app/components/login/LoginController.js"></script>
+        <script src="app/components/resources/socket.js"></script>
+        <script src="app/components/resources/chatresources.js"></script>
+        <script src="app/components/createroom/CreateRoomController.js"></script>
+        <script src="app/components/roomlist/RoomlistController.js"></script>
+        <script src="app/components/chat/ChatController.js"></script>
+        <script src="app/components/privatechat/PrivateChatController.js"></script>
+        <script src="app/components/inbox/InboxController.js"></script>
+        <!-- ng-view -->
+        <div id="container">
+            <div ng-view></div>
+        </div>
+
+    </body>
+</html>
