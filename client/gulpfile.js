@@ -7,7 +7,7 @@ var gulpUtil = require('gulp-util');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 
-gulp.task('default', ['webserver', 'browserify']);
+gulp.task('default', ['webserver']);
 
 gulp.task('jshint', function() {
     return gulp.src([
@@ -29,7 +29,8 @@ gulp.task('uglify', function() {
 gulp.task('webserver', function() {
     connect.server({
         root: ['app', './'],
-        port: 8008
+        port: 8008,
+        fallback: 'app/index.html'
     });
 });
 
