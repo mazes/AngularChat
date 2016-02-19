@@ -26,7 +26,7 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
                 templateUrl: "app/components/inbox/inbox.html",
                 controller: "InboxController"
             }).otherwise({ 
-                redirectTo: "/"
+                redirectTo: ""
             });
             $locationProvider.html5Mode({
                 enabled: true,

@@ -1,4 +1,4 @@
-angular.module("angularChat").factory('socket', function ($rootScope) {
+angular.module("angularChat").factory('socket',["$rootScope", function ($rootScope) {
   var socket = io.connect("http://localhost:8080");
   return {
     on: function (eventName, callback) {
@@ -33,4 +33,4 @@ angular.module("angularChat").factory('socket', function ($rootScope) {
       socket.disconnect();
     }
   };
-});
+}]);
