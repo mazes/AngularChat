@@ -66,6 +66,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
                 $scope.checkIfValid(inputValue, theRoom);
             });
         }else{
+            console.log("here");
             var room = {
                 room: theRoom,
                 pass: undefined
@@ -74,6 +75,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
                 if(!success){
                     console.log(reason);
                 }else{
+                    console.log("here");
                     ChatResource.setCurrentRoom(theRoom);
                     $location.url('/chat/' + theRoom);
                 }
@@ -95,6 +97,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
                     positionX: 'right'
                 });
             }else{
+                ChatResource.setCurrentRoom(theRoom);
                 $location.url('/chat/' + theRoom);
             }
         });
