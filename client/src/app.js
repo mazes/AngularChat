@@ -2,6 +2,10 @@
 
 angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notification", "hSweetAlert"])
 
+    .value('loggedIn', {
+        logged: false
+    })
+
     .config(["$routeProvider", function($routeProvider) {
         $routeProvider.when("/", {
                 templateUrl: "login/login.html",
@@ -18,9 +22,6 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
             }).when("/chat/private/:chattee", {
                 templateUrl: "privatechat/privateChat.html",
                 controller: "PrivateChatController"
-            }).when("/login/:disconnect", {
-                templateUrl: "login/login.html",
-                controller: "LoginController"
             }).when("/unreadpms/", {
                 templateUrl: "inbox/inbox.html",
                 controller: "InboxController"

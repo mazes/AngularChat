@@ -1,8 +1,11 @@
 "use strict";
 
 angular.module("angularChat").controller("RoomListController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "socket", "sweet", "Notification",
-function listUsers($scope, $routeParams, $http, $location, ChatResource, socket, sweet, Notification){
+["$scope", "$routeParams", "$location", "ChatResource", "socket", "sweet", "Notification", "loggedIn",
+function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet, Notification, loggedIn){
+	if(!loggedIn.logged){
+		$location.url('/');
+	}
 	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 	$scope.currentUser = ChatResource.getUser();
 	$scope.currentPassword = "";
@@ -94,7 +97,7 @@ function listUsers($scope, $routeParams, $http, $location, ChatResource, socket,
 				$location.url('/chat/' + theRoom);
 			}
 		});
-	}
+	};
 
 	$scope.sendPrivate = function sendPrivate(user){
 		$location.url('/chat/private/' + user);

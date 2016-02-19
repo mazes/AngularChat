@@ -3,6 +3,7 @@
 angular.module("angularChat").controller("InboxController",
 ["$scope","$routeParams", "$http", "$location", "ChatResource", "socket",
 function InboxController($scope, $routeParams, $http, $location, ChatResource, socket){
+	$scope.currentUser = ChatResource.getUser();
 	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
 	$scope.getUnread = function getUnread(){
 		var messages = ChatResource.getpMessages();

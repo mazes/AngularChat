@@ -1,8 +1,11 @@
 "use strict";
 
 angular.module("angularChat").controller("PrivateChatController",
-["$scope", "$routeParams", "$http", "$location", "ChatResource", "$route", "socket",
-function ChatController($scope, $routeParams, $http, $location, ChatResource, $route, socket){
+["$scope", "$routeParams", "$location", "ChatResource", "$route", "socket", "loggedIn",
+function ChatController($scope, $routeParams, $location, ChatResource, $route, socket, loggedIn){
+	if(!loggedIn.logged){
+		$location.url('/');
+	}
 	$scope.chattee = $routeParams.chattee;
 	$scope.currentUser = ChatResource.getUser();
 	$scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
