@@ -71,7 +71,7 @@ body {
 
 /* Chats */
 
-.messageField {
+.messageField, .privateMessageField {
     width: 66%;
     padding-right: 2%;
     word-wrap: break-word;
@@ -82,10 +82,13 @@ body {
     padding-bottom: 10px;
 }
 
+#PMF {
+    width: 92%;
+}
 
 #roomTopic {
     border-bottom: solid lightgray 1px;
-    width: 66%
+    width: 66%;
 }
 
 #roomOp {
@@ -272,7 +275,7 @@ img{
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
-    transition: all 0.5sss ease-in-out;
+    transition: all 0.5 ease-in-out;
 }
 img:hover{
 	-webkit-transform: scale(1.1);

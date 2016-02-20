@@ -1,18 +1,10 @@
 <ng-include src="'app/views/header.html'"></ng-include>
 <ng-include src="'app/views/footer.html'"></ng-include>
 <h1 class="customHeading">{{currentUser}} is chatting with {{chattee}}</h1>
-<div class="messageField">
+<div id="PMF" class="privateMessageField">
     <ul>
         <li ng-repeat="message in chat" style="list-style:none;">[{{message.date | date:'MM/dd/yyyy @ HH:mm'}}-{{message.sender}}] {{message.message}}</li>
     </ul>
-</div>
-
-<div id="chatroomUsers" class="usersInRoom">
-	<span class="customHeadingNoMargin" style="font-size:120%">Users Online</span>
-	<ul class="list-group">
-		<li ng-repeat="user in users" ng-click="operations(user)"
-          class="list-group-item customHeadingNoMargin">{{user}}</li>
-	</ul>
 </div>
 
 <div class="inputField">

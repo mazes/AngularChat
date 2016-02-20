@@ -50,6 +50,8 @@ function ChatController($scope, $routeParams, $location, ChatResource, $route, s
             }
             $scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
         }
+
+        $('#PMF').scrollTop($('#PMF').prop("scrollHeight"));
         return messages;
     };
 
