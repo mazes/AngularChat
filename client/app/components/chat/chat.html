@@ -1,30 +1,12 @@
 <ng-include src="'app/views/header.html'"></ng-include>
 <ng-include src="'app/views/footer.html'"></ng-include>
-<h1 class="customHeading">{{currentUser}} is chatting in room {{roomName}}</h1>
 
-<div ng-init="init()" class="messageField">
+<h1 class="customHeading" alt="{{currentUser}} is chatting in room {{roomName}}">{{currentUser}} is chatting in room {{roomName}}</h1>
+<div id="roomTopic" class="customHeadingNoMargin">
+    {{topic}}
+</div>
 
-    <div id="roomTopic">
- 		{{topic}}
- 		<div ng-if="isOp">
- 			<button type="button" ng-click="topicTrue()">Edit Topic</button>
- 			<button type="button" ng-click="passwordTrue()">Set Password</button>
- 			<button type="button" ng-click="removePassword()">Remove Password</button>
- 		</div>
- 		<div id="editinputs">
-    		<div ng-show="setTopic">
-    			<form name="addTopic" ng-submit="editTopic()">
-    				<input type="text" ng-model="newTopic" placeholder="new topic..." ng-keyup="$event.keyCode == 13 && editTopic()"/>
-    			</form>
-			</div>
-			<div ng-show="setPassword">
-    			<form name="setPass" ng-submit="editPassword()">
-    				<input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
-    			</form>
-			</div>
-		</div>
-	</div>
-
+<div ng-init="init()" id="MF" class="messageField" style="max-height:427px;">
     <ul id="serverMessage" class="animate-show animate-hide">
     	<li ng-repeat="serverMessage in serverMessages track by $index">{{serverMessage}}</li>
     </ul>
@@ -33,7 +15,7 @@
     </ul>
 
 </div>
-<div id="usersInRoom">
+<div id="chatroomUsers" class="usersInRoom">
 	<span class="customHeadingNoMargin" style="font-size:120%">Users in Room</span>
 	<div ng-hide="actionBar">
     	<button type="button" ng-repeat="command in commands" ng-click="actionBarCommand(command)" style="display:block; width:150px;">{{command}}</button>
@@ -46,6 +28,26 @@
   		<li ng-repeat="banned in bannedUsers" ng-click="unBan(banned)"
           class="list-group-item customHeadingNoMargin">{{banned}}-banned</li>
 	</ul>
+</div>
+
+<div id="roomOp">
+    <div ng-if="isOp">
+        <button type="button" id="editT" class="btn btn-default customHeadingNoMargin" ng-click="topicTrue()">Edit Topic</button>
+        <button type="button" id="setP" class="btn btn-default customHeadingNoMargin" ng-click="passwordTrue()">Set Password</button>
+        <button type="button" id="removeP" class="btn btn-default customHeadingNoMargin" ng-click="removePassword()">Remove Password</button>
+    </div>
+    <div id="editinputs">
+        <div ng-show="setTopic">
+            <form name="addTopic" ng-submit="editTopic()">
+                <input type="text" ng-model="newTopic" placeholder="new topic..." ng-keyup="$event.keyCode == 13 && editTopic()"/>
+            </form>
+        </div>
+        <div ng-show="setPassword">
+            <form name="setPass" ng-submit="editPassword()">
+                <input type="chat" ng-model="newPassword" placeholder="new password..." ng-keyup="$event.keyCode == 13 && editPassword()"/>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="inputField">

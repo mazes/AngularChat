@@ -7,6 +7,14 @@
     </ul>
 </div>
 
+<div id="chatroomUsers" class="usersInRoom">
+	<span class="customHeadingNoMargin" style="font-size:120%">Users Online</span>
+	<ul class="list-group">
+		<li ng-repeat="user in users" ng-click="operations(user)"
+          class="list-group-item customHeadingNoMargin">{{user}}</li>
+	</ul>
+</div>
+
 <div class="inputField">
     <form name="pMessageForm">
         <input type="text" class="form-control" style="display:inline; width:80%;" ng-model="message" ng-required="true" ng-keyup="$event.keyCode == 13 && pMessageForm.$valid && sendPrivateMessage(chattee)" autofocus/>

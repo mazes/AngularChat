@@ -1,4 +1,4 @@
-html, body {
+tml, body {
     margin:0;
     padding:0;
     height:100%;
@@ -18,7 +18,12 @@ body {
     text-align: center;
     margin-top: 30px;
     border-bottom: solid lightgray 1px;
-    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 35px;
+}
+
+.customHeading:hover {
+    overflow: auto;
 }
 
 .customHeaderLabel {
@@ -45,18 +50,26 @@ body {
     padding: 10px 40px 30px 35px;
     width: 70%;
     min-width: 800px;
-    min-height: 700px;
-    max-height: 740px;
+    height: 700px;
     margin:auto;
     position: relative;
 }
+
+/* Header */
 
 #navHeader {
     margin: -10px -40px 0px -35px;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-
 }
+
+.navbar-left {
+    float:left;
+    margin-left: 15px;
+}
+
+
+/* Chats */
 
 .messageField {
     width: 66%;
@@ -65,18 +78,39 @@ body {
     overflow: auto;
     position: absolute;
     bottom: 118px;
-    max-height: 65%;
+    max-height: 450px;
+    padding-bottom: 10px;
 }
 
 
 #roomTopic {
     border-bottom: solid lightgray 1px;
+    width: 66%
 }
 
-#usersInRoom {
+#roomOp {
     position: absolute;
-    right: 39px;
+    top: 8px;
+    right: 18px;
+}
+
+#chatroomUsers {
+position: absolute;
+top: 126px;
+overflow-x: hidden;
+}
+
+#chatroomUsers li {
+    text-overflow: ellipsis;
+}
+
+.usersInRoom {
+    position: absolute;
+    right: 43px;
     width: 22%;
+    max-height: 455px;
+    overflow: auto;
+    border-bottom: solid lightgray 1px;
 }
 
 .inputField {
@@ -89,6 +123,8 @@ body {
     margin-left: 5%;
     border-top: solid lightgray 1px;
 }
+
+/* Login */
 
 .loginInput {
     display: block;
@@ -107,6 +143,15 @@ body {
     left: 81%;
 }
 
+.loginErrorMessages {
+    position: absolute;
+    left: 10%;
+    bottom: -40px;
+    color: crimson;
+}
+
+/* Footer */
+
 .navFooter {
     position: absolute;
     bottom: 0;
@@ -117,15 +162,6 @@ body {
     width: 100%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-}
-
-.chatList {
-    overflow: auto;
-}
-
-.navbar-left {
-    float:left;
-    margin-left: 15px;
 }
 
 /* Create Room */
@@ -140,10 +176,12 @@ body {
 /* Room list */
 
 .roomList {
-    width: 50%;
+    width: 80%;
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
+    max-height: 410px;
+    overflow: auto;
 }
 
 .list-group-item {
@@ -151,6 +189,28 @@ body {
     padding-top: 5px;
     text-align: center;
     font-size: 130%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#roomsAvailable {
+     width: 45%;
+     position: absolute;
+     left:10px;
+     max-height: 580px;
+}
+
+#usersOnline {
+    width: 45%;
+    position: absolute;
+    right:10px;
+    max-height: 580px;
+}
+
+.bottomLine {
+    margin-top: 40px;
+    width: 100%;
+    border-top: solid lightgray 1px;
 }
 
  /* Server message */
@@ -208,11 +268,11 @@ body {
 }
 
 img{
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5sss ease-in-out;
 }
 img:hover{
 	-webkit-transform: scale(1.1);

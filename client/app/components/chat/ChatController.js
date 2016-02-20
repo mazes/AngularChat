@@ -31,6 +31,7 @@ angular.module("angularChat").controller("ChatController",
                     $scope.isOp = true;
                 }
             }
+            $("#MF").scrollTop($("#MF").prop("scrollHeight"));
         };
 
         $scope.init = function init(){
@@ -44,7 +45,7 @@ angular.module("angularChat").controller("ChatController",
                     $scope.getMessages();
                 }
             }
-        }); 
+        });
 
         socket.on("recv_privatemsg", function(user, message){
             ChatResource.addpMessage(message, user, $scope.currentUser);
@@ -113,7 +114,7 @@ angular.module("angularChat").controller("ChatController",
         });
 
         socket.on("opped", function(room, user, currentUser){
-            if(room === $routeParams.room){ 
+            if(room === $routeParams.room){
                 $scope.sendServerMessage(currentUser + " gave  " + user + " op rights!");
             }
         });
@@ -151,7 +152,7 @@ angular.module("angularChat").controller("ChatController",
                     ChatResource.getRoomList();
                     var pMessage = {
                         nick: user,
-                        message: "I have un-banned you from room: " + $routeParams.room 
+                        message: "I have un-banned you from room: " + $routeParams.room
                     };
                     ChatResource.sendPrivateMessage(pMessage, function(success){
                         if(success){
@@ -245,7 +246,7 @@ angular.module("angularChat").controller("ChatController",
                         if(op !== $scope.currentUser){
                             var message = {
                                 nick: op,
-                                message: "I changed the password in " + 
+                                message: "I changed the password in " +
                                 $routeParams.room + " to: " + pass.pass
                             };
                             ChatResource.sendPrivateMessage(message, function(success){
@@ -270,7 +271,7 @@ angular.module("angularChat").controller("ChatController",
                         if(op !== $scope.currentUser){
                             var message = {
                                 nick: op,
-                                message: "I removed the password in " + 
+                                message: "I removed the password in " +
                                 $routeParams.room
                             };
                             ChatResource.sendPrivateMessage(message, function(success){
