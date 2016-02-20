@@ -25,9 +25,8 @@ angular.module("angularChat", ["ui.bootstrap", "ngRoute", "ngAnimate", "ui-notif
             }).when("/unreadpms/", {
                 templateUrl: "app/components/inbox/inbox.html",
                 controller: "InboxController"
-            }).otherwise("/", {
-                templateUrl: "app/components/login/login.html",
-                controller: "LoginController"
+            }).otherwise({ 
+                redirectTo: ""
             });
             $locationProvider.html5Mode({
                 enabled: true,

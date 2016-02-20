@@ -7,20 +7,17 @@ var gulpUtil = require('gulp-util');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 
-gulp.task('default', ['webserver', 'browserify']);
+gulp.task('default', ['jshint','uglify', 'webserver']);
 
 gulp.task('jshint', function() {
-    return gulp.src([
-	'app/**/*.js',
-	'!node_modules/**/*'
-    ])
+    return gulp.src(['app/**/*.js','!node_modules/**/*'])
     .pipe(jshint())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'));
 });
 
 gulp.task('uglify', function() {
-  return gulp.src(['app/**/*.js', '!node_modules/**/*'])
+  return gulp.src(['app/app.js','app/components/resources/socket.js','app/**/*.js', '!node_modules/**/*'])
     .pipe(concat('main.js'))
     .pipe(uglify().on('error', gulpUtil.log))
     .pipe(gulp.dest('dist'));
@@ -29,7 +26,8 @@ gulp.task('uglify', function() {
 gulp.task('webserver', function() {
     connect.server({
         root: ['app', './'],
-        port: 8008
+        port: 8008,
+        fallback: 'app/index.html'
     });
 });
 
@@ -38,7 +36,7 @@ gulp.task('browserify', function() {
     return browserify('./app/app.js')
         // bundles it and creates a file called main.js
         .bundle()
-        .pipe(source('main.js'))
+        .pipe(source('bundle.js'))
         // saves it the public/js/ directory
         .pipe(gulp.dest('./dist/js/'));
 })
