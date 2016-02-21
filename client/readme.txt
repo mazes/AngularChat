@@ -1,5 +1,5 @@
 Web programming 2 Assignment - Angular Chat Application
-by Eiríkur B. Ragnarsson, Ragnar Ingi Ragnarsson and Árni Oddson.
+by Eiríkur B. Ragnarsson, Ragnar Ingi Ragnarsson and Árni Oddsson.
 
 Instructions
 
