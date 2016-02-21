@@ -11,14 +11,25 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
     $scope.currentPassword = "";
     $scope.userList = function userList(){
         ChatResource.getUsers();
-        socket.on("userlist", function(data){
-            $scope.users = data;
-        });
     };
+
+    $scope.getRooms = function getRooms(){
+        ChatResource.getRoomList();
+    };
+
+    socket.on("updateusers", function(){
+        console.log("updateusers");
+        $scope.userList();
+        $scope.getRooms();
+    });
 
     socket.on("roomlist", function(data){
         $scope.rooms = data;
     }); 
+
+    socket.on("userlist", function(data){
+        $scope.users = data;
+    });
 
     socket.on("recv_privatemsg", function(user, message){
         ChatResource.addpMessage(message, user, $scope.currentUser);
@@ -33,10 +44,6 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
             $scope.unReadMessages = ChatResource.getNumberOfUnreadMessages();
         }
     });
-
-    $scope.getRooms = function getRooms(){
-        ChatResource.getRoomList();
-    };
 
     $scope.joinRoom = function joinRoom(theRoom, roomobj){
         for (var user in roomobj.users){
@@ -66,8 +73,7 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
                 $scope.checkIfValid(inputValue, theRoom);
             });
         }else{
-            console.log("here");
-            var room = {
+                var room = {
                 room: theRoom,
                 pass: undefined
             };
@@ -75,7 +81,6 @@ function listUsers($scope, $routeParams, $location, ChatResource, socket, sweet,
                 if(!success){
                     console.log(reason);
                 }else{
-                    console.log("here");
                     ChatResource.setCurrentRoom(theRoom);
                     $location.url('/chat/' + theRoom);
                 }

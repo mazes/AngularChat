@@ -4,8 +4,6 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var concat = require('gulp-concat');
 var gulpUtil = require('gulp-util');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
 
 gulp.task('default', ['jshint','uglify', 'webserver']);
 
@@ -30,13 +28,3 @@ gulp.task('webserver', function() {
         fallback: 'app/index.html'
     });
 });
-
-gulp.task('browserify', function() {
-    // Grabs the app.js file
-    return browserify('./app/app.js')
-        // bundles it and creates a file called main.js
-        .bundle()
-        .pipe(source('bundle.js'))
-        // saves it the public/js/ directory
-        .pipe(gulp.dest('./dist/js/'));
-})
